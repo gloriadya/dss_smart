@@ -9,15 +9,12 @@ class Nilai extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['kandidat_id', 'kriteria_id', 'nilai'];
+    protected $fillable = [
+        'kandidat_id', 'kriteria', 'nilai'
+    ];
 
     public function kandidat()
     {
         return $this->belongsTo(Kandidat::class);
-    }
-
-    public function kriteria()
-    {
-        return $this->belongsTo(Kriteria::class);
     }
 }
