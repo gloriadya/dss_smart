@@ -34,4 +34,8 @@ class CreateKandidatsTable extends Migration
     {
         Schema::dropIfExists('kandidats');
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 34908a597a7a32730dbb82dcd5e90ec2566bbba8
