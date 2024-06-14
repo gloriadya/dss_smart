@@ -93,7 +93,7 @@
         </div>
     </div>
     <div class="main-content">
-        <h2>Selamat Datang admin,</h2>
+        <h2>Selamat Datang Admin,</h2>
         <p>Gunakan menu Penilaian Kandidat untuk mengelola nilai kandidat, dan menu Perankingan untuk eksekusi nilai perankingan.</p>
     </div>
 </body>
