@@ -11,8 +11,15 @@ class CreateNilaisTable extends Migration
         Schema::create('nilais', function (Blueprint $table) {
             $table->id();
             $table->foreignId('kandidat_id')->constrained()->onDelete('cascade');
-            $table->string('kriteria');
-            $table->integer('nilai');
+            $table->integer('pengalaman_kerja')->nullable();
+            $table->integer('pendidikan')->nullable();
+            $table->integer('kepribadian_dan_keterampilan')->nullable();
+            $table->integer('referensi')->nullable();
+            $table->integer('tes_keterampilan')->nullable();
+            $table->integer('keterampilan')->nullable();
+            $table->integer('keahlian_teknis')->nullable();
+            $table->integer('kesesuaian_budaya_perusahaan')->nullable();
+            $table->integer('wawancara')->nullable();
             $table->timestamps();
         });
     }

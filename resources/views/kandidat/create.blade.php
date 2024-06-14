@@ -18,85 +18,118 @@
 
         .container {
             background-color: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
             max-width: 500px;
             width: 100%;
-        }
-
-        .form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form h2 {
-            margin-bottom: 20px;
-            color: #333333;
             text-align: center;
         }
 
-        .form label {
+        .form h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333333;
+        }
+
+        .form h1 span {
+            color: orange;
+        }
+
+        .form h1 span:last-child {
+            color: #1a1aff;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
             margin-bottom: 5px;
             color: #555555;
         }
 
-        .form input, .form select, .form textarea, .form button {
-            margin-bottom: 15px;
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: calc(100% - 20px);
             padding: 10px;
             border: 1px solid #dddddd;
-            border-radius: 5px;
+            border-radius: 30px;
             font-size: 16px;
-            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            box-sizing: border-box;
         }
 
-        .form input:focus, .form select:focus, .form textarea:focus {
-            border-color: #80bdff;
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #1a1aff;
             outline: none;
-            box-shadow: 0 0 5px rgba(128, 189, 255, 0.5);
         }
 
-        .form button {
-            background-color: #28a745;
-            color: #ffffff;
+        .form-group input::placeholder,
+        .form-group select::placeholder,
+        .form-group textarea::placeholder {
+            color: #cccccc;
+        }
+
+        .btn {
+            background-color: #1a1aff;
+            color: white;
+            padding: 10px 30px;
             border: none;
+            border-radius: 30px;
             cursor: pointer;
-            font-size: 18px;
-            transition: background-color 0.3s ease;
+            font-size: 16px;
+            width: calc(100% - 20px);
+            margin-left: auto;
+            margin-right: auto;
+            transition: background-color 0.3s;
         }
 
-        .form button:hover {
-            background-color: #218838;
+        .btn:hover {
+            background-color: #0000e6;
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <h1>Hello, <span>future talent</span>!</h1>
         <form class="form" method="POST" action="{{ route('kandidat.store') }}">
             @csrf
-            <h2>Form Calon Kandidat</h2>
-            <label for="nama">Nama:</label>
-            <input type="text" id="nama" name="nama" required>
-
-            <label for="tempat-lahir">Tempat Lahir:</label>
-            <input type="text" id="tempat-lahir" name="tempat_lahir" required>
-
-            <label for="tanggal-lahir">Tanggal Lahir:</label>
-            <input type="date" id="tanggal-lahir" name="tanggal_lahir" required>
-
-            <label for="jenis-kelamin">Jenis Kelamin:</label>
-            <select id="jenis-kelamin" name="jenis_kelamin" required>
-                <option value="L">Laki-laki</option>
-                <option value="P">Perempuan</option>
-            </select>
-
-            <label for="alamat">Alamat:</label>
-            <textarea id="alamat" name="alamat" rows="4" required></textarea>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-
-            <button type="submit">Submit Form</button>
+            <div class="form-group">
+                <label for="nama">Nama Lengkap</label>
+                <input type="text" id="nama" name="nama" placeholder="Masukkan nama lengkap" required>
+            </div>
+            <div class="form-group">
+                <label for="tempat-lahir">Tempat Lahir</label>
+                <input type="text" id="tempat-lahir" name="tempat_lahir" placeholder="Masukkan tempat lahir" required>
+            </div>
+            <div class="form-group">
+                <label for="tanggal-lahir">Tanggal Lahir</label>
+                <input type="date" id="tanggal-lahir" name="tanggal_lahir" placeholder="Pilih tanggal" required>
+            </div>
+            <div class="form-group">
+                <label for="jenis-kelamin">Jenis Kelamin</label>
+                <select id="jenis-kelamin" name="jenis_kelamin" placeholder="Pilih jenis kelamin" required>
+                    <option value="" disabled selected>Pilih jenis kelamin</option>
+                    <option value="L">Laki-laki</option>
+                    <option value="P">Perempuan</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="alamat">Alamat</label>
+                <input type="text" id="alamat" name="alamat" placeholder="Masukkan alamat" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Masukkan email" required>
+            </div>
+            <button type="submit" class="btn">Submit</button>
         </form>
     </div>
 </body>

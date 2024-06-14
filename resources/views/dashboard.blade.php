@@ -10,84 +10,91 @@
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f8f9fa;
-        }
-        .container {
+            background-color: #ffffff;
             display: flex;
-            flex-direction: column;
             min-height: 100vh;
         }
-        header {
-            background-color: #343a40;
+        .sidebar {
+            background-color: #29388f;
             color: #fff;
-            padding: 15px 20px;
+            width: 250px;
+            padding: 20px;
             display: flex;
+            flex-direction: column;
             justify-content: space-between;
-            align-items: center;
+        }
+        .logo {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .logo img {
+            max-width: 100%;
         }
         nav {
-            background-color: #495057;
-            color: #fff;
-            padding: 15px 20px;
             display: flex;
-            justify-content: center;
-            gap: 20px;
+            flex-direction: column;
+            gap: 10px;
         }
         nav a {
             text-decoration: none;
             color: #fff;
-            font-weight: bold;
-            transition: color 0.3s ease;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
         }
-        nav a:hover {
-            color: #adb5bd;
+        nav a:hover, nav a.active {
+            background-color: #3b4cca;
         }
-        main {
+        .main-content {
             flex: 1;
-            padding: 20px;
-            background-color: #ffffff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin: 20px;
-            border-radius: 10px;
+            padding: 40px;
         }
-        footer {
-            background-color: #343a40;
-            color: #fff;
-            padding: 15px 20px;
+        .main-content h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .main-content p {
+            font-size: 16px;
+            color: #333;
+        }
+        .logout {
             text-align: center;
+            margin-top: 20px;
         }
-        .btn-logout {
+        .logout button {
             background: none;
             border: none;
             color: white;
             cursor: pointer;
             font-size: 16px;
         }
-        .btn-logout:hover {
+        .logout button:hover {
             color: #adb5bd;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Dashboard Admin</h1>
+    <div class="sidebar">
+        <div>
+            <div class="logo">
+                <img src="images/logo.png" alt="Logo">
+            </div>
+            <nav>
+                <a href="#" class="active">Dashboard</a>
+                <a href="{{ route('penilaian.index') }}">Penilaian Kandidat</a>
+                <a href="{{ route('kandidat.rank') }}">Perankingan</a>
+            </nav>
+        </div>
+        <div class="logout">
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <button type="submit" class="btn-logout">Logout</button>
+                <button type="submit">Keluar Admin</button>
             </form>
-        </header>
-        <nav>
-            <a href="{{ route('penilaian.index') }}">Penilaian Kandidat</a>
-            <a href="{{ route('kandidat.rank') }}">Perankingan</a>
-        </nav>
-        <main>
-            <h2>Selamat Datang, Admin</h2>
-            <p>Gunakan menu di atas untuk mengelola penilaian kandidat dan perankingan.</p>
-        </main>
-        <footer>
-            &copy; 2024 Sistem Pendukung Keputusan
-        </footer>
+        </div>
+    </div>
+    <div class="main-content">
+        <h2>Selamat Datang admin,</h2>
+        <p>Gunakan menu Penilaian Kandidat untuk mengelola nilai kandidat, dan menu Perankingan untuk eksekusi nilai perankingan.</p>
     </div>
 </body>
 </html>
