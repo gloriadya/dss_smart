@@ -13,8 +13,6 @@ class AddColumnsToNilaiTable extends Migration
             $table->integer('kepribadian_keterampilan')->after('pendidikan');
             $table->integer('referensi')->after('kepribadian_keterampilan');
             $table->integer('tes_keterampilan')->after('referensi');
-            $table->integer('keterampilan')->after('tes_keterampilan');
-            $table->integer('keahlian_teknis')->after('keterampilan');
             $table->integer('kesesuaian_budaya')->after('keahlian_teknis');
             $table->integer('wawancara')->after('kesesuaian_budaya');
         });
@@ -29,8 +27,6 @@ class AddColumnsToNilaiTable extends Migration
                 'kepribadian_keterampilan',
                 'referensi',
                 'tes_keterampilan',
-                'keterampilan',
-                'keahlian_teknis',
                 'kesesuaian_budaya',
                 'wawancara'
             ]);

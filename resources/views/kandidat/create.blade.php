@@ -3,102 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Calon Kandidat</title>
+    <title>Input Data Calon Pegawai</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f9;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f9f9f9;
             margin: 0;
             padding: 0;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            min-height: 100vh;
         }
-
-        .container {
-            background-color: #ffffff;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
-            width: 100%;
+        .sidebar {
+            background-color: #fff;
+            color: #fff;
+            width: 250px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .logo {
             text-align: center;
-        }
-
-        .form h1 {
-            font-size: 24px;
             margin-bottom: 20px;
-            color: #333333;
         }
-
-        .form h1 span {
-            color: orange;
+        .logo img {
+            max-width: 100%;
         }
-
-        .form h1 span:last-child {
-            color: #1a1aff;
+        nav {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            min-height: -webkit-fill-available;
         }
-
+        nav a {
+            text-decoration: none;
+            color: #3b4cca;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        nav a:hover, nav a.active {
+            font-weight: bold;
+            color: #fff;
+            background-color: #3b4cca;
+        }
+        .main-content {
+            flex: 1;
+            padding: 40px;
+        }
+        .main-content h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
         .form-group {
             margin-bottom: 20px;
-            text-align: left;
         }
-
         .form-group label {
+            font-weight: bold;
             display: block;
             margin-bottom: 5px;
-            color: #555555;
         }
-
         .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: calc(100% - 20px);
+        .form-group select {
+            width: 100%;
             padding: 10px;
-            border: 1px solid #dddddd;
-            border-radius: 30px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
             font-size: 16px;
-            margin-left: auto;
-            margin-right: auto;
-            box-sizing: border-box;
         }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            border-color: #1a1aff;
-            outline: none;
-        }
-
-        .form-group input::placeholder,
-        .form-group select::placeholder,
-        .form-group textarea::placeholder {
-            color: #cccccc;
-        }
-
         .btn {
-            background-color: #1a1aff;
-            color: white;
-            padding: 10px 30px;
+            background-color: #3b4cca;
+            color: #fff;
             border: none;
-            border-radius: 30px;
+            padding: 10px 20px;
+            border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
-            width: calc(100% - 20px);
-            margin-left: auto;
-            margin-right: auto;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s ease;
         }
-
         .btn:hover {
-            background-color: #0000e6;
+            background-color: #1f2b6d;
+        }
+        .logout {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .logout button {
+            background: none;
+            border: none;
+            color: red;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .logout button:hover {
+            color: darkred;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Hello, <span>future talent</span>!</h1>
+    <div class="sidebar">
+        <div class="logo">
+            <img src="/images/logo.png" alt="Logo">
+        </div>
+        <nav>
+            <a href="{{ route('dashboard') }}">Dashboard</a>
+            <a href="#" class="active">Input Data Kandidat</a>
+            <a href="{{ route('penilaian.index') }}">Penilaian Kandidat</a>
+            <a href="{{ route('kandidat.rank') }}">Perankingan</a>
+        </nav>
+        <div class="logout">
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit">Keluar Akun</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <h1>Input Data Calon Pegawai</h1>
         <form class="form" method="POST" action="{{ route('kandidat.store') }}">
             @csrf
             <div class="form-group">
@@ -106,16 +136,12 @@
                 <input type="text" id="nama" name="nama" placeholder="Masukkan nama lengkap" required>
             </div>
             <div class="form-group">
-                <label for="tempat-lahir">Tempat Lahir</label>
-                <input type="text" id="tempat-lahir" name="tempat_lahir" placeholder="Masukkan tempat lahir" required>
-            </div>
-            <div class="form-group">
-                <label for="tanggal-lahir">Tanggal Lahir</label>
-                <input type="date" id="tanggal-lahir" name="tanggal_lahir" placeholder="Pilih tanggal" required>
+                <label for="jurusan">Jurusan</label>
+                <input type="text" id="jurusan" name="jurusan" placeholder="Masukkan jurusan" required>
             </div>
             <div class="form-group">
                 <label for="jenis-kelamin">Jenis Kelamin</label>
-                <select id="jenis-kelamin" name="jenis_kelamin" placeholder="Pilih jenis kelamin" required>
+                <select id="jenis-kelamin" name="jenis_kelamin" required>
                     <option value="" disabled selected>Pilih jenis kelamin</option>
                     <option value="L">Laki-laki</option>
                     <option value="P">Perempuan</option>
@@ -131,6 +157,36 @@
             </div>
             <button type="submit" class="btn">Submit</button>
         </form>
+
+        <!-- Modal -->
+        <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="successModalLabel">Success</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {{ session('success') }}
+                    </div>
+                    <div class="modal-footer">
+                        <a href="{{ route('kandidat.create') }}" class="btn btn-primary">Tetap di Halaman Input</a>
+                        <a href="{{ route('penilaian.index') }}" class="btn btn-secondary">Lanjut ke Penilaian</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script>
+        @if(session('success'))
+            $('#successModal').modal('show');
+        @endif
+    </script>
 </body>
 </html>

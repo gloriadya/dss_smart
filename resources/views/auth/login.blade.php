@@ -70,7 +70,7 @@
 </head>
 <body>
     <div class="container">
-        <h1><span>Hello, </span><span>admin</span></h1>
+        <h1><span>Selamat Datang</span></h1>
         
         <form method="POST" action="{{ route('login') }}">
             @csrf

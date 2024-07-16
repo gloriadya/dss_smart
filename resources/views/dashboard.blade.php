@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Sistem Pendukung Keputusan</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"> -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -15,7 +16,7 @@
             min-height: 100vh;
         }
         .sidebar {
-            background-color: #29388f;
+            background-color: #fff;
             color: #fff;
             width: 250px;
             padding: 20px;
@@ -37,15 +38,18 @@
         }
         nav a {
             text-decoration: none;
-            color: #fff;
+            color: #3b4cca;
             padding: 10px 15px;
             border-radius: 5px;
             transition: background-color 0.3s ease;
         }
         nav a:hover, nav a.active {
+            font-weight: bold;
+            color: #fff;
             background-color: #3b4cca;
         }
         .main-content {
+            background-color: #f9f9f9;
             flex: 1;
             padding: 40px;
         }
@@ -64,12 +68,17 @@
         .logout button {
             background: none;
             border: none;
-            color: white;
+            color: red;
             cursor: pointer;
             font-size: 16px;
         }
         .logout button:hover {
-            color: #adb5bd;
+            color: red;
+        }
+        h1 {
+            text-align: left;
+            color: #333;
+            font-size: 24px;
         }
     </style>
 </head>
@@ -81,6 +90,7 @@
             </div>
             <nav>
                 <a href="#" class="active">Dashboard</a>
+                <a href="{{ route('kandidat.create') }}">Input Data Kandidat</a>
                 <a href="{{ route('penilaian.index') }}">Penilaian Kandidat</a>
                 <a href="{{ route('kandidat.rank') }}">Perankingan</a>
             </nav>
@@ -88,13 +98,13 @@
         <div class="logout">
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <button type="submit">Keluar Admin</button>
+                <button type="submit">Keluar Akun</button>
             </form>
         </div>
     </div>
     <div class="main-content">
-        <h2>Selamat Datang Admin,</h2>
-        <p>Gunakan menu Penilaian Kandidat untuk mengelola nilai kandidat, dan menu Perankingan untuk eksekusi nilai perankingan.</p>
+    <h1>Selamat Datang,</h1>
+        <p>Gunakan menu Penilaian Kandidat untuk memberikan penilaian kepada setiap calon pegawai magang, dan menu Perankingan untuk melihat hasil perankingan.</p>
     </div>
 </body>
 </html>

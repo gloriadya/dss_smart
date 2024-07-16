@@ -16,8 +16,7 @@ class CreateKandidatsTable extends Migration
         Schema::create('kandidats', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('tempat_lahir');
-            $table->date('tanggal_lahir');
+            $table->string('jurusan');
             $table->string('jenis_kelamin');
             $table->text('alamat');
             $table->string('email')->unique();

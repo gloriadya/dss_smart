@@ -8,6 +8,7 @@ use App\Http\Controllers\PenilaianController;
 use App\Http\Controllers\KandidatController;
 use App\Http\Controllers\NilaiController;
 
+
 Route::get('kandidat/create', 'KandidatController@create');
 Route::post('kandidat', 'KandidatController@store')->name('kandidat.store');
 
@@ -53,8 +54,9 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('/kandidat/create', [KandidatController::class, 'create'])->name('kandidat.create');
 Route::get('/penilaian', [PenilaianController::class, 'index'])->middleware(['auth', 'verified'])->name('penilaian.index');
+//Route::get('/kandidat/rank/export', [KandidatController::class, 'exportRanking'])->name('kandidat.rank.export');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -16,8 +16,6 @@ class CreateNilaisTable extends Migration
             $table->integer('kepribadian_dan_keterampilan')->nullable();
             $table->integer('referensi')->nullable();
             $table->integer('tes_keterampilan')->nullable();
-            $table->integer('keterampilan')->nullable();
-            $table->integer('keahlian_teknis')->nullable();
             $table->integer('kesesuaian_budaya_perusahaan')->nullable();
             $table->integer('wawancara')->nullable();
             $table->timestamps();

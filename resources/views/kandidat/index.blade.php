@@ -1,25 +1,126 @@
-<!DOCTYPE html>
-<html>
+<!-- <!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Penilaian Kandidat</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penilaian Kandidat</title> -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"> -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            display: flex;
+            min-height: 100vh;
+        }
+        .sidebar {
+            background-color: #fff;
+            color: #fff;
+            width: 250px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .logo {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .logo img {
+            max-width: 100%;
+        }
+        nav {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        nav a {
+            text-decoration: none;
+            color: #3b4cca;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        nav a:hover, nav a.active {
+            font-weight: bold;
+            color: #fff;
+            background-color: #3b4cca;
+        }
+        h1 {
+            text-align: left;
+            color: #333;
+            font-size: 24px;
+        }
+        .main-content {
+            background-color: #f9f9f9;
+            flex: 1;
+            padding: 40px;
+        }
+        .main-content h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .main-content p {
+            font-size: 16px;
+            color: #333;
+        }
+        .logout {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .logout button {
+            background: none;
+            border: none;
+            color: red;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .logout button:hover {
+            color: red;
+        }
+        .btn-primary {
+            color: #fff;
+            background-color: #3b4cca;
+            border-color: #3b4cca;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-    <h1 class="mt-5">Penilaian Kandidat</h1>
-    @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
-    <form method="POST" action="{{ route('nilai.store') }}">
-        @csrf
-        <div class="form-group">
-            <label for="kandidat_id">Nama Kandidat</label>
-            <select class="form-control" id="kandidat_id" name="kandidat_id">
-                @foreach($kandidats as $kandidat)
-                    <option value="{{ $kandidat->id }}">{{ $kandidat->nama }}</option>
-                @endforeach
-            </select>
+    <div class="sidebar">
+        <div>
+            <div class="logo">
+                <img src="images/logo.png" alt="Logo">
+            </div>
+            <nav>
+                <a href="{{ route('dashboard') }}">Dashboard</a>
+                <a href="#" class="active">Penilaian Kandidat</a>
+                <a href="{{ route('kandidat.rank') }}">Perankingan</a>
+            </nav>
         </div>
+        <div class="logout">
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit">Keluar Akun</button>
+            </form>
+        </div>
+    </div>
+    <div class="main-content">
+        <h1>Penilaian Kandidat</h1>
+        @if(session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+            <form method="POST" action="{{ route('nilai.store') }}">
+        @csrf
+            <div class="form-group">
+                <label for="kandidat_id">Nama Kandidat</label>
+                <select class="form-control" id="kandidat_id" name="kandidat_id">
+                    @foreach($kandidats as $kandidat)
+                        <option value="{{ $kandidat->id }}">{{ $kandidat->nama }}</option>
+                    @endforeach
+                </select>
+            </div>
         <div class="form-group">
             <label for="kriteria">Kriteria</label>
             <select class="form-control" id="kriteria" name="kriteria">
@@ -28,8 +129,6 @@
                 <option value="Kepribadian dan Keterampilan">Kepribadian dan Keterampilan</option>
                 <option value="Referensi">Referensi</option>
                 <option value="Tes Keterampilan">Tes Keterampilan</option>
-                <option value="Keterampilan">Keterampilan</option>
-                <option value="Keahlian Teknis">Keahlian Teknis</option>
                 <option value="Kesesuaian Budaya Perusahaan">Kesesuaian Budaya Perusahaan</option>
                 <option value="Wawancara">Wawancara</option>
             </select>
@@ -42,68 +141,168 @@
     </form>
 </div>
 </body>
-</html>
+</html> -->
 
-<!-- <!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Penilaian Kandidat</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            display: flex;
+            min-height: 100vh;
+        }
+        .sidebar {
+            background-color: #fff;
+            color: #fff;
+            width: 250px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .logo {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .logo img {
+            max-width: 100%;
+        }
+        nav {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        nav a {
+            text-decoration: none;
+            color: #3b4cca;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        nav a:hover, nav a.active {
+            font-weight: bold;
+            color: #fff;
+            background-color: #3b4cca;
+        }
+        h1 {
+            text-align: left;
+            color: #333;
+            font-size: 24px;
+        }
+        .main-content {
+            background-color: #f9f9f9;
+            flex: 1;
+            padding: 40px;
+        }
+        .main-content h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .main-content p {
+            font-size: 16px;
+            color: #333;
+        }
+        .logout {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .logout button {
+            background: none;
+            border: none;
+            color: red;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .logout button:hover {
+            color: red;
+        }
+        .btn-primary {
+            color: #fff;
+            background-color: #3b4cca;
+            border-color: #3b4cca;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-    <h1 class="mt-5">Penilaian Kandidat</h1>
-    @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
-    <form method="POST" action="{{ route('nilai.store') }}">
-        @csrf
-        <div class="form-group">
-            <label for="kandidat_id">Nama Kandidat</label>
-            <select class="form-control" id="kandidat_id" name="kandidat_id">
-                @foreach($kandidats as $kandidat)
-                    <option value="{{ $kandidat->id }}">{{ $kandidat->nama }}</option>
-                @endforeach
-            </select>
+    <div class="sidebar">
+        <div>
+            <div class="logo">
+                <img src="images/logo.png" alt="Logo">
+            </div>
+            <nav>
+                <a href="{{ route('dashboard') }}">Dashboard</a>
+                <a href="{{ route('kandidat.create') }}">Input Data Kandidat</a>
+                <a href="#" class="active">Penilaian Kandidat</a>
+                <a href="{{ route('kandidat.rank') }}">Perankingan</a>
+            </nav>
         </div>
-        <div class="form-group">
-            <label for="pengalaman_kerja">Pengalaman Kerja</label>
-            <input type="number" class="form-control" id="pengalaman_kerja" name="pengalaman_kerja" min="1" max="100" required>
+        <div class="logout">
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit">Keluar Akun</button>
+            </form>
         </div>
-        <div class="form-group">
-            <label for="pendidikan">Pendidikan</label>
-            <input type="number" class="form-control" id="pendidikan" name="pendidikan" min="1" max="100" required>
-        </div>
-        <div class="form-group">
-            <label for="kepribadian_keterampilan">Kepribadian dan Keterampilan</label>
-            <input type="number" class="form-control" id="kepribadian_keterampilan" name="kepribadian_keterampilan" min="1" max="100" required>
-        </div>
-        <div class="form-group">
-            <label for="referensi">Referensi</label>
-            <input type="number" class="form-control" id="referensi" name="referensi" min="1" max="100" required>
-        </div>
-        <div class="form-group">
-            <label for="tes_keterampilan">Tes Keterampilan</label>
-            <input type="number" class="form-control" id="tes_keterampilan" name="tes_keterampilan" min="1" max="100" required>
-        </div>
-        <div class="form-group">
-            <label for="keterampilan">Keterampilan</label>
-            <input type="number" class="form-control" id="keterampilan" name="keterampilan" min="1" max="100" required>
-        </div>
-        <div class="form-group">
-            <label for="keahlian_teknis">Keahlian Teknis</label>
-            <input type="number" class="form-control" id="keahlian_teknis" name="keahlian_teknis" min="1" max="100" required>
-        </div>
-        <div class="form-group">
-            <label for="kesesuaian_budaya">Kesesuaian Budaya Perusahaan</label>
-            <input type="number" class="form-control" id="kesesuaian_budaya" name="kesesuaian_budaya" min="1" max="100" required>
-        </div>
-        <div class="form-group">
-            <label for="wawancara">Wawancara</label>
-            <input type="number" class="form-control" id="wawancara" name="wawancara" min="1" max="100" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-</div>
+    </div>
+    <div class="main-content">
+        <h1>Penilaian Kandidat</h1>
+        @if(session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+        <form method="POST" action="{{ route('nilai.store') }}">
+            @csrf
+            <div class="form-group">
+                <label for="kandidat_id">Nama Kandidat</label>
+                <select class="form-control" id="kandidat_id" name="kandidat_id">
+                    @foreach($kandidats as $kandidat)
+                        <option value="{{ $kandidat->id }}">{{ $kandidat->nama }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="pengalaman_kerja">Pengalaman Kerja</label>
+                <input type="hidden" name="kriteria[]" value="Pengalaman Kerja">
+                <input type="number" class="form-control" id="pengalaman_kerja" name="nilai[]" min="1" max="100" required>
+            </div>
+            <div class="form-group">
+                <label for="pendidikan">Pendidikan</label>
+                <input type="hidden" name="kriteria[]" value="Pendidikan">
+                <input type="number" class="form-control" id="pendidikan" name="nilai[]" min="1" max="100" required>
+            </div>
+            <div class="form-group">
+                <label for="kepribadian_keterampilan">Kepribadian dan Keterampilan</label>
+                <input type="hidden" name="kriteria[]" value="Kepribadian dan Keterampilan">
+                <input type="number" class="form-control" id="kepribadian_keterampilan" name="nilai[]" min="1" max="100" required>
+            </div>
+            <div class="form-group">
+                <label for="referensi">Referensi</label>
+                <input type="hidden" name="kriteria[]" value="Referensi">
+                <input type="number" class="form-control" id="referensi" name="nilai[]" min="1" max="100" required>
+            </div>
+            <div class="form-group">
+                <label for="tes_keterampilan">Tes Keterampilan</label>
+                <input type="hidden" name="kriteria[]" value="Tes Keterampilan">
+                <input type="number" class="form-control" id="tes_keterampilan" name="nilai[]" min="1" max="100" required>
+            </div>
+            <div class="form-group">
+                <label for="kesesuaian_budaya">Kesesuaian Budaya Perusahaan</label>
+                <input type="hidden" name="kriteria[]" value="Kesesuaian Budaya Perusahaan">
+                <input type="number" class="form-control" id="kesesuaian_budaya" name="nilai[]" min="1" max="100" required>
+            </div>
+            <div class="form-group">
+                <label for="wawancara">Wawancara</label>
+                <input type="hidden" name="kriteria[]" value="Wawancara">
+                <input type="number" class="form-control" id="wawancara" name="nilai[]" min="1" max="100" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
 </body>
-</html> -->
+</html>

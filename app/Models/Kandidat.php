@@ -10,7 +10,7 @@ class Kandidat extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nama', 'tempat_lahir', 'tanggal_lahir', 'jenis_kelamin', 'alamat', 'email',
+        'nama', 'jurusan', 'jenis_kelamin', 'alamat', 'email',
     ];
 
     public function nilai()
