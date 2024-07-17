@@ -21,5 +21,12 @@ class AdminUserSeeder extends Seeder
             'password' => Hash::make('password'),
             'is_admin' => true,
         ]);
+
+        User::create([
+            'name' => 'Gloria Dyah Pramseti',
+            'email' => 'gloria@gmail.com',
+            'password' => Hash::make('password'),
+            'is_admin' => true,
+        ]);
     }
 }
