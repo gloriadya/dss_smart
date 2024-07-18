@@ -4,21 +4,29 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNilaisTable extends Migration
+class CreateNilaiTable extends Migration
 {
     public function up()
     {
         Schema::create('nilai', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('kandidat_id')->constrained()->onDelete('cascade');
-            $table->integer('pengalaman_kerja')->nullable();
-            $table->integer('pendidikan')->nullable();
-            $table->integer('kepribadian_dan_keterampilan')->nullable();
-            $table->integer('referensi')->nullable();
-            $table->integer('tes_keterampilan')->nullable();
-            $table->integer('kesesuaian_budaya_perusahaan')->nullable();
-            $table->integer('wawancara')->nullable();
+            $table->unsignedBigInteger('kandidat_id');
+            $table->integer('pengalaman_kerja');
+            $table->integer('pendidikan');
+            $table->integer('kepribadian_keterampilan');
+            $table->integer('referensi');
+            $table->integer('tes_keterampilan');
+            $table->integer('keterampilan');
+            $table->integer('keahlian_teknis');
+            $table->integer('kesesuaian_budaya');
+            $table->integer('wawancara');
+            $table->unsignedBigInteger('kriteria_id');
+            $table->double('nilai', 8, 2);
             $table->timestamps();
+
+            // Foreign keys
+            $table->foreign('kandidat_id')->references('id')->on('kandidats');
+            $table->foreign('kriteria_id')->references('id')->on('kriterias');
         });
     }
 
