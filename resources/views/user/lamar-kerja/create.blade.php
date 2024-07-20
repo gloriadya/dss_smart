@@ -126,7 +126,7 @@
 
     <div class="main-content">
         <h1>Input Data Calon Pegawai</h1>
-        <form class="form" method="POST" action="{{ route('isian-data-pelamar.store') }}">
+        <form class="form" method="POST" action="{{ route('isian-data-pelamar.store') }}" enctype="multipart/form-data">
             @csrf
             <input type="hidden" id="lowongan_id" name="lowongan_id" value="{{ $lowongan->id }}" required>
             <div class="form-group">
@@ -156,6 +156,22 @@
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="Masukkan email" required>
+            </div>
+            <div class="form-group">
+                <label for="wa">Nomor WA</label>
+                <input type="text" id="wa" name="wa" placeholder="Masukkan nomor WA" required>
+            </div>
+            <div class="form-group">
+                <label for="cv">Berkas CV</label>
+                <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" required>
+            </div>
+            <div class="form-group">
+                <label for="portofolio">Link Portofolio</label>
+                <input type="url" id="portofolio" name="portofolio" placeholder="Masukkan link portofolio" required>
+            </div>
+            <div class="form-group">
+                <label for="pengalaman">Pengalaman Kerja</label>
+                <textarea id="pengalaman" name="pengalaman" placeholder="Masukkan pengalaman kerja" rows="4" required></textarea>
             </div>
             <button type="submit" class="btn">Submit</button>
         </form>
