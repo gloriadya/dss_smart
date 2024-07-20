@@ -2,11 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 use App\Models\Kandidat;
-use App\Models\Lowongan;
 use App\Models\KandidatXLowongan;
+use Illuminate\Database\Seeder;
 
 class DBSeeder extends Seeder
 {
@@ -71,17 +69,15 @@ class DBSeeder extends Seeder
 
         $kandidats = Kandidat::whereBetween('id', [29, 53])->pluck('id')->toArray();
 
-        foreach ([1,2,3,4,5] as $jobPostingId) {
-            $randomKandidats = collect($kandidats)->random(5);
+        foreach ($kandidats as $kandidatId) {
 
-            foreach ($randomKandidats as $kandidatId) {
-                KandidatXLowongan::create([
-                    'lowongan_id' => $jobPostingId,
-                    'kandidat_id' => $kandidatId,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
-            }
+            $randomLowongan = collect([1, 2, 3, 4, 5])->random(1);
+            KandidatXLowongan::create([
+                'lowongan_id' => $randomLowongan[0],
+                'kandidat_id' => $kandidatId,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
         }
 
     }

@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perankingan</title>
+    <title>Daftar Lowongan</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -24,7 +23,6 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-
         }
 
         .logo {
@@ -130,23 +128,18 @@
             border-bottom: none;
         }
 
-        .no-scores {
+        .no-data {
             text-align: center;
             padding: 20px;
             font-size: 16px;
             color: #777;
         }
 
-        .detail-column {
-            white-space: nowrap;
-        }
-
-        .download-btn {
-            margin-top: 20px;
+        .filter-form {
+            margin-bottom: 20px;
         }
     </style>
 </head>
-
 <body>
     <div class="sidebar">
         <div>
@@ -157,7 +150,7 @@
                 <a href="{{ route('dashboard') }}">Dashboard</a>
                 <a href="{{ route('kandidat.create') }}">Input Data Kandidat</a>
                 <a href="{{ route('penilaian.index') }}">Penilaian Kandidat</a>
-                <a href="#" class="active">Perankingan</a>
+                <a href="{{ route('lowongan.index') }}" class="active">Daftar Lowongan</a>
             </nav>
         </div>
         <div class="logout">
@@ -167,54 +160,47 @@
             </form>
         </div>
     </div>
+
     <div class="main-content">
-        <h1>Ranking Kandidat</h1>
-        <h2>Data berikut merupakan data calon pegawai magang yang telah diurutkan berdasarkan hasil penilaian tertinggi</h2>
+        <div class="form">
+            <h1>Edit Lowongan</h1>
+            <form method="POST" action="{{ route('lowongan.update', $lowongan->id) }}" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="form-group">
+                    <label for="judul">Judul Lowongan</label>
+                    <input type="text" id="judul" name="judul" class="form-control" value="{{ $lowongan->judul }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="deskripsi">Deskripsi</label>
+                    <textarea id="deskripsi" name="deskripsi" class="form-control" rows="4" required>{{ $lowongan->deskripsi }}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="lokasi">Lokasi</label>
+                    <input type="text" id="lokasi" name="lokasi" class="form-control" value="{{ $lowongan->lokasi }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="poster_lowongan">Poster Lowongan (Gambar)</label>
+                    <input type="file" id="poster_lowongan" name="poster_lowongan" class="form-control">
+                    @if ($lowongan->poster_lowongan)
+                        <img src="{{ asset('storage/' . $lowongan->poster_lowongan) }}" alt="Poster Lowongan" style="max-width: 150px; margin-top: 10px;">
+                    @endif
+                </div>
 
-        <!-- Dropdown for lowongan -->
-        <form method="GET" action="{{ route('kandidat.rank') }}">
-            <div class="form-group">
-                <label for="lowongan_id">Pilih Lowongan</label>
-                <select class="form-control" id="lowongan_id" name="lowongan_id" onchange="this.form.submit()">
-                    <option value="">Semua Lowongan</option>
-                    @foreach($lowongans as $lowongan)
-                        <option value="{{ $lowongan->id }}" {{ request('lowongan_id') == $lowongan->id ? 'selected' : '' }}>
-                            {{ $lowongan->judul }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-        </form>
-
-        <!-- Download Button -->
-        <form method="GET" action="{{ route('kandidat.rank') }}">
-            <input type="hidden" name="download" value="true">
-            <button type="submit" class="btn btn-success">Unduh Hasil Perangkingan</button>
-        </form>
-
-        @if($kandidats->isEmpty())
-            <div class="no-scores">No candidates available</div>
-        @else
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nama</th>
-                        <th>Skor</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($kandidats as $kandidat)
-                        @if(isset($kandidat->score) && $kandidat->score != 0)
-                            <tr>
-                                <td>{{ $kandidat->nama }}</td>
-                                <td>{{ number_format($kandidat->score, 2) }}</td>
-                            </tr>
-                        @endif
-                    @endforeach
-                </tbody>
-            </table>
-        @endif
+                <div class="form-group">
+                    <label for="tanggal_dibuka">Tanggal Dibuka</label>
+                    <input type="date" id="tanggal_dibuka" name="tanggal_dibuka" class="form-control" value="{{ $lowongan->tanggal_dibuka }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="tanggal_ditutup">Tanggal Ditutup</label>
+                    <input type="date" id="tanggal_ditutup" name="tanggal_ditutup" class="form-control" value="{{ $lowongan->tanggal_ditutup ? $lowongan->tanggal_ditutup : '' }}">
+                </div>
+                <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+            </form>
+        </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
-
 </html>

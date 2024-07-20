@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perankingan</title>
+    <title>Daftar Lowongan</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -24,7 +24,6 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-
         }
 
         .logo {
@@ -130,19 +129,15 @@
             border-bottom: none;
         }
 
-        .no-scores {
+        .no-data {
             text-align: center;
             padding: 20px;
             font-size: 16px;
             color: #777;
         }
 
-        .detail-column {
-            white-space: nowrap;
-        }
-
-        .download-btn {
-            margin-top: 20px;
+        .filter-form {
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -157,7 +152,7 @@
                 <a href="{{ route('dashboard') }}">Dashboard</a>
                 <a href="{{ route('kandidat.create') }}">Input Data Kandidat</a>
                 <a href="{{ route('penilaian.index') }}">Penilaian Kandidat</a>
-                <a href="#" class="active">Perankingan</a>
+                <a href="{{ route('lowongan.index') }}" class="active">Daftar Lowongan</a>
             </nav>
         </div>
         <div class="logout">
@@ -167,49 +162,58 @@
             </form>
         </div>
     </div>
+
     <div class="main-content">
-        <h1>Ranking Kandidat</h1>
-        <h2>Data berikut merupakan data calon pegawai magang yang telah diurutkan berdasarkan hasil penilaian tertinggi</h2>
+        <h1>Daftar Lowongan</h1>
+        <h2>Filter lowongan berdasarkan status</h2>
+        <div style="display: flex; direction: row;">
+            <!-- Filter Form -->
+            <form method="GET" action="{{ route('lowongan.index') }}" class="filter-form" style="width: 150px">
+                <div class="form-group">
+                    <label for="filter">Status Lowongan</label>
+                    <select id="filter" name="filter" class="form-control" onchange="this.form.submit()">
+                        <option value="">Semua</option>
+                        <option value="active" {{ request('filter') == 'active' ? 'selected' : '' }}>Aktif</option>
+                        <option value="closed" {{ request('filter') == 'closed' ? 'selected' : '' }}>Ditutup</option>
+                    </select>
+                </div>
+            </form>
 
-        <!-- Dropdown for lowongan -->
-        <form method="GET" action="{{ route('kandidat.rank') }}">
-            <div class="form-group">
-                <label for="lowongan_id">Pilih Lowongan</label>
-                <select class="form-control" id="lowongan_id" name="lowongan_id" onchange="this.form.submit()">
-                    <option value="">Semua Lowongan</option>
-                    @foreach($lowongans as $lowongan)
-                        <option value="{{ $lowongan->id }}" {{ request('lowongan_id') == $lowongan->id ? 'selected' : '' }}>
-                            {{ $lowongan->judul }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-        </form>
-
-        <!-- Download Button -->
-        <form method="GET" action="{{ route('kandidat.rank') }}">
-            <input type="hidden" name="download" value="true">
-            <button type="submit" class="btn btn-success">Unduh Hasil Perangkingan</button>
-        </form>
-
-        @if($kandidats->isEmpty())
-            <div class="no-scores">No candidates available</div>
+            <a href="{{ route('lowongan.create') }}" class="btn btn-primary mb-3 align-items-end d-flex"
+                style="height: min-content">Tambah Lowongan</a>
+        </div>
+        @if ($lowongans->isEmpty())
+            <div class="no-data">Tidak ada lowongan yang tersedia</div>
         @else
             <table>
                 <thead>
                     <tr>
-                        <th>Nama</th>
-                        <th>Skor</th>
+                        <th>Judul</th>
+                        <th>Deskripsi</th>
+                        <th>Lokasi</th>
+                        <th>Tanggal Dibuka</th>
+                        <th>Tanggal Ditutup</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($kandidats as $kandidat)
-                        @if(isset($kandidat->score) && $kandidat->score != 0)
-                            <tr>
-                                <td>{{ $kandidat->nama }}</td>
-                                <td>{{ number_format($kandidat->score, 2) }}</td>
-                            </tr>
-                        @endif
+                    @foreach ($lowongans as $lowongan)
+                        <tr>
+                            <td>{{ $lowongan->judul }}</td>
+                            <td>{{ $lowongan->deskripsi }}</td>
+                            <td>{{ $lowongan->lokasi }}</td>
+                            <td>{{ $lowongan->tanggal_dibuka }}</td>
+                            <td>{{ $lowongan->tanggal_ditutup }}</td>
+                            <td>
+                                <a href="{{ route('lowongan.edit', $lowongan->id) }}"
+                                    class="btn btn-warning btn-sm">Edit</a>
+                                <form action="{{ route('lowongan.close', $lowongan->id) }}" method="POST"
+                                    style="display:inline;">
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger btn-sm">Tutup</button>
+                                </form>
+                            </td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>

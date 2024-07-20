@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('judul');
             $table->text('deskripsi');
             $table->string('lokasi');
-            $table->string('poster_lowongan');
+            $table->string('poster_lowongan')->nullable();
             $table->date('tanggal_dibuka');
             $table->date('tanggal_ditutup')->nullable();
             $table->timestamps();
