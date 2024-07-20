@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kandidat;
-use App\Models\Nilai;
-use App\Models\Lowongan;
 use App\Models\KandidatXLowongan;
+use App\Models\Lowongan;
+use App\Models\Nilai;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use Illuminate\Support\Facades\DB;
+
 
 class KandidatController extends Controller
 {
@@ -40,7 +42,8 @@ class KandidatController extends Controller
         $kandidat = Kandidat::findOrFail($id);
         return view('kandidat.create', compact('kandidat'));
     }
-    public function storeCriteria(Request $request, $id){
+    public function storeCriteria(Request $request, $id)
+    {
         $validatedData = $request->validate([
             'kandidat_id' => 'required|exists:kandidats,id',
             'kriteria' => 'required|string',
@@ -58,10 +61,22 @@ class KandidatController extends Controller
 
     public function rank(Request $request)
     {
-        $kandidats = Kandidat::with('nilai')->get();
+        $lowonganId = $request->input('lowongan_id');
+        $lowongans = DB::table('lowongans')->get();
 
-        // Bobot setiap kriteria
-        $weights  = [
+        $kandidatsQuery = Kandidat::with('nilai')
+            ->join('kandidat_x_lowongan', 'kandidats.id', '=', 'kandidat_x_lowongan.kandidat_id')
+            ->join('lowongans', 'kandidat_x_lowongan.lowongan_id', '=', 'lowongans.id')
+            ->select('kandidats.*')
+            ->distinct();
+
+        if ($lowonganId) {
+            $kandidatsQuery->where('lowongans.id', '=', $lowonganId);
+        }
+
+        $kandidats = $kandidatsQuery->get();
+
+        $weights = [
             'Pengalaman Kerja' => 0.15,
             'Pendidikan' => 0.1,
             'Kepribadian dan Keterampilan' => 0.2,
@@ -76,22 +91,18 @@ class KandidatController extends Controller
             $maxValues = [];
             $minValues = [];
 
-            // Menentukan nilai maksimum dan minimum dari setiap kriteria
             foreach ($weights as $criteria => $weight) {
                 $maxValues[$criteria] = Nilai::where('kriteria', '=', $criteria)->max('nilai');
                 $minValues[$criteria] = Nilai::where('kriteria', '=', $criteria)->min('nilai');
             }
 
-            // Menghitung nilai setiap kandidat berdasarkan kriteria penilaian
             if ($kandidat->nilai) {
                 foreach ($kandidat->nilai as $nilai) {
-                    // Normalisasi nilai
                     $normalizedValue = 0;
                     if (($nilai->nilai - $minValues[$nilai->kriteria]) != 0) {
                         $normalizedValue = 100 * ($nilai->nilai - $minValues[$nilai->kriteria]) / ($maxValues[$nilai->kriteria] - $minValues[$nilai->kriteria]);
                     }
 
-                    // Menghitung nilai berdasarkan bobot kriteria
                     $nilaiParameter = 0;
                     foreach ($weights as $criteria => $weight) {
                         if ($criteria === $nilai->kriteria) {
@@ -102,35 +113,25 @@ class KandidatController extends Controller
                     $score += $normalizedValue * $nilaiParameter;
                 }
             }
-
-            // Menyimpan nilai setiap kandidat
             $kandidat->score = $score;
         }
 
-        // Mengurutkan kandidat berdasarkan nilai tertinggi
         $kandidats = $kandidats->sortByDesc('score');
 
-        // Check if the request is for downloading the Excel file
         if ($request->has('download')) {
             $spreadsheet = new Spreadsheet();
             $sheet = $spreadsheet->getActiveSheet();
             $sheet->setTitle('Ranking Kandidat');
 
-            // Set headers
             $sheet->setCellValue('A1', 'Nama');
             $sheet->setCellValue('B1', 'Score');
 
-            //dd($kandidat->score);
-            // Populate data
             $row = 2;
             foreach ($kandidats as $kandidat) {
-                //dd($kandidat->score);
                 $sheet->setCellValue('A' . $row, $kandidat->nama);
                 $sheet->setCellValue('B' . $row, $kandidat->score);
                 $row++;
             }
-
-            // Download the file
             $writer = new Xlsx($spreadsheet);
             $filename = 'ranking_kandidat.xlsx';
             header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
@@ -140,17 +141,15 @@ class KandidatController extends Controller
             exit;
         }
 
-        // Menampilkan urutan kandidat dari nilai tertinggi
-        return view('kandidat.rank', compact('kandidats'));
+        return view('kandidat.rank', compact('kandidats', 'lowongans'));
     }
 
     public function isianBerkasLamaran($id)
     {
         $lowongan = Lowongan::findOrFail($id);
 
-        return view('user.lamar-kerja.create',compact('lowongan'));
+        return view('user.lamar-kerja.create', compact('lowongan'));
     }
-
 
     public function isianBerkasLamaranStore(Request $request)
     {
@@ -175,4 +174,17 @@ class KandidatController extends Controller
 
         return redirect()->route('isian-data-pelamar.create', $request->input('lowongan_id'))->with('success', 'Kandidat berhasil disimpan! Silakan pilih opsi berikut.');
     }
+
+    public function getKandidatsByLowongan($lowonganId)
+    {
+        $kandidats = DB::table('kandidats')
+        ->join('kandidat_x_lowongan', 'kandidats.id', '=', 'kandidat_x_lowongan.kandidat_id')
+        ->join('lowongans', 'kandidat_x_lowongan.lowongan_id', '=', 'lowongans.id')
+        ->where('lowongans.id','=', $lowonganId)
+        ->select('kandidats.id', 'kandidats.nama')
+        ->get();
+
+        return response()->json($kandidats);
+    }
+
 }

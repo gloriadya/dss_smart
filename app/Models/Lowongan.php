@@ -15,7 +15,6 @@ class lowongan extends Model
         'tanggal_dibuka', 'tanggal_ditutup', 'created_at', 'updated_at'
     ];
 
-    // Relasi dengan tabel kandidat melalui tabel pivot job_posting_kandidat
     public function kandidats()
     {
         return $this->belongsToMany(Kandidat::class, 'job_posting_kandidat', 'lowongan_id', 'kandidat_id')
