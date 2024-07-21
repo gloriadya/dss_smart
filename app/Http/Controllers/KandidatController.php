@@ -175,6 +175,10 @@ class KandidatController extends Controller
         $kandidat->jenis_kelamin = $request->input('jenis_kelamin');
         $kandidat->alamat = $request->input('alamat');
         $kandidat->email = $request->input('email');
+        $kandidat->no_wa = $request->input('no_wa');
+        $kandidat->cv = $request->input('cv');
+        $kandidat->portofolio = $request->input('portofolio');
+        $kandidat->pengalaman_kerja = $request->input('pengalaman_kerja');
 
         $kandidat->save();
 

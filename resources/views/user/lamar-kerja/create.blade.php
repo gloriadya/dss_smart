@@ -159,11 +159,11 @@
             </div>
             <div class="form-group">
                 <label for="wa">Nomor WA</label>
-                <input type="text" id="wa" name="wa" placeholder="Masukkan nomor WA" required>
+                <input type="text" id="no_wa" name="no_wa" placeholder="Masukkan nomor WA" required>
             </div>
             <div class="form-group">
                 <label for="cv">Link CV</label>
-                <input type="url" id="CV" name="CV" placeholder="Masukkan link CV" required>
+                <input type="url" id="cv" name="cv" placeholder="Masukkan link CV" required>
             </div>
             <div class="form-group">
                 <label for="portofolio">Link Portofolio</label>
@@ -171,7 +171,7 @@
             </div>
             <div class="form-group">
                 <label for="pengalaman">Pengalaman Kerja</label>
-                <textarea id="pengalaman" name="pengalaman" placeholder="Masukkan pengalaman kerja" rows="4" required></textarea>
+                <textarea id="pengalaman_kerja" name="pengalaman_kerja" placeholder="Masukkan pengalaman kerja" rows="4" required></textarea>
             </div>
             <button type="submit" class="btn">Submit</button>
         </form>
