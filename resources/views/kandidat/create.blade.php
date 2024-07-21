@@ -122,13 +122,13 @@
             <tbody>
                 @foreach ($kandidats as $kandidat)
                 <tr>
-                    <td>{{ $kandidat->id }}</td>
-                    <td>{{ $kandidat->nama }}</td>
-                    <td>{{ $kandidat->jurusan }}</td>
-                    <td>{{ $kandidat->jenis_kelamin }}</td>
-                    <td>{{ $kandidat->alamat }}</td>
-                    <td>{{ $kandidat->email }}</td>
-                    <td>{{ $kandidat->no_wa }}</td>
+                    <td>{{ $kandidat->kandidat->id }}</td>
+                    <td>{{ $kandidat->kandidat->nama }}</td>
+                    <td>{{ $kandidat->kandidat->jurusan }}</td>
+                    <td>{{ $kandidat->kandidat->jenis_kelamin }}</td>
+                    <td>{{ $kandidat->kandidat->alamat }}</td>
+                    <td>{{ $kandidat->kandidat->email }}</td>
+                    <td>{{ $kandidat->kandidat->no_wa }}</td>
                 </tr>
                 @endforeach
             </tbody>

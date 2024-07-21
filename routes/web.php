@@ -23,7 +23,7 @@ Route::resource('kandidats', KandidatController::class);
 Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
 Route::post('/register', [RegisteredUserController::class, 'store']);
 
-Route::get('/', [PageController::class, 'dashboardPage']);
+Route::get('/', [PageController::class, 'welcomePage']);
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::get('/dashboard', [PageController::class, 'dashboardPage'])->name('dashboard');
@@ -42,7 +42,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
     // LOWONGAN ROUTE
     Route::get('/buat-lowongan', [LowonganController::class, 'buatLowonganView'])->name('lowongan.create');
-    Route::post('/lowongan', [LowonganController::class, 'buatLowonganStore'])->name('lowongan.store');
+    Route::post('/store-lowongan', [LowonganController::class, 'buatLowonganStore'])->name('lowongan.store');
     Route::get('/list-lowongan', [LowonganController::class, 'listLowonganView'])->name('lowongan.index');
     Route::get('/lowongan/{id}', [LowonganController::class, 'editLowonganView'])->name('lowongan.edit');
     Route::put('/lowongan/{id}', [LowonganController::class, 'updateLowongan'])->name('lowongan.update');

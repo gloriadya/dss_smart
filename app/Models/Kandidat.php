@@ -13,6 +13,11 @@ class Kandidat extends Model
         'nama', 'jurusan', 'jenis_kelamin', 'alamat', 'email',
     ];
 
+    public function KandidatXLowongan()
+    {
+        return $this->hasMany(KandidatXLowongan::class);
+    }
+
     public function nilai()
     {
         return $this->hasMany(Nilai::class);

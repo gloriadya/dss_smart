@@ -20,4 +20,9 @@ class lowongan extends Model
         return $this->belongsToMany(Kandidat::class, 'job_posting_kandidat', 'lowongan_id', 'kandidat_id')
             ->withTimestamps();
     }
+    
+    public function KandidatXLowongan()
+    {
+        return $this->hasMany(KandidatXLowongan::class);
+    }
 }

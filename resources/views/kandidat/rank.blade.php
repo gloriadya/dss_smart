@@ -204,10 +204,10 @@
                 </thead>
                 <tbody>
                     @foreach ($kandidats as $kandidat)
-                        @if(isset($kandidat->score) && $kandidat->score != 0)
+                        @if(isset($kandidat->nilai) && $kandidat->nilai != 0)
                             <tr>
                                 <td>{{ $kandidat->nama }}</td>
-                                <td>{{ number_format($kandidat->score, 2) }}</td>
+                                <td>{{ number_format($kandidat->nilai, 2) }}</td>
                             </tr>
                         @endif
                     @endforeach

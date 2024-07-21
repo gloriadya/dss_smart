@@ -13,11 +13,12 @@ class Nilai extends Model
         'kandidat_id',
         'pengalaman_kerja',
         'pendidikan',
-        'kepribadian_dan_keterampilan',
+        'kepribadian_keterampilan',
         'referensi',
         'tes_keterampilan',
-        'kesesuaian_budaya_perusahaan',
+        'kesesuaian_budaya',
         'wawancara',
+        'nilai'
     ];
 
     public function kandidat()

@@ -88,8 +88,8 @@
             <div class="header">
                 <img src="images/logo.png" alt="PT Otak Kanan">
                 <div class="buttons">
-                    <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Login HRD</a>
-                    <!-- <a href="{{ route('kandidat.store') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Form Pelamar</a> -->
+                    <a href="{{ route('dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Login HRD</a>
+                    <a href="{{ route('user.daftar-lowongan') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Form Pelamar</a>
                 </div>
             </div>
 

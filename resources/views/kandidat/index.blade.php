@@ -129,39 +129,39 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="pengalaman_kerja">Pengalaman Kerja</label>
-                <input type="hidden" name="kriteria[]" value="Pengalaman Kerja">
-                <input type="number" class="form-control" id="pengalaman_kerja" name="nilai[]" min="1" max="100" required>
+                <label for="pengalaman_kerja">Pengalaman Kerja (1-100)</label>
+                {{-- <input type="hidden" name="pengalaman_kerja" value="pengalaman_kerja"> --}}
+                <input type="number" class="form-control" id="pengalaman_kerja" name="pengalaman_kerja" value="pengalaman_kerja" min="1" max="100" required>
             </div>
             <div class="form-group">
                 <label for="pendidikan">Pendidikan</label>
-                <input type="hidden" name="kriteria[]" value="Pendidikan">
-                <input type="number" class="form-control" id="pendidikan" name="nilai[]" min="1" max="100" required>
+                {{-- <input type="hidden" name="kriteria[]" value="Pendidikan"> --}}
+                <input type="number" class="form-control" id="pendidikan" name="pendidikan" value="pendidikan" min="1" max="100" required>
             </div>
             <div class="form-group">
                 <label for="kepribadian_keterampilan">Kepribadian dan Keterampilan</label>
-                <input type="hidden" name="kriteria[]" value="Kepribadian dan Keterampilan">
-                <input type="number" class="form-control" id="kepribadian_keterampilan" name="nilai[]" min="1" max="100" required>
+                {{-- <input type="hidden" name="kriteria[]" value="Kepribadian dan Keterampilan"> --}}
+                <input type="number" class="form-control" id="kepribadian_keterampilan" name="kepribadian_keterampilan" value="kepribadian_keterampilan" min="1" max="100" required>
             </div>
             <div class="form-group">
                 <label for="referensi">Referensi</label>
-                <input type="hidden" name="kriteria[]" value="Referensi">
-                <input type="number" class="form-control" id="referensi" name="nilai[]" min="1" max="100" required>
+                {{-- <input type="hidden" name="kriteria[]" value="Referensi"> --}}
+                <input type="number" class="form-control" id="referensi" name="referensi" value="referensi" min="1" max="100" required>
             </div>
             <div class="form-group">
                 <label for="tes_keterampilan">Tes Keterampilan</label>
-                <input type="hidden" name="kriteria[]" value="Tes Keterampilan">
-                <input type="number" class="form-control" id="tes_keterampilan" name="nilai[]" min="1" max="100" required>
+                {{-- <input type="hidden" name="kriteria[]" value="Tes Keterampilan"> --}}
+                <input type="number" class="form-control" id="tes_keterampilan" name="tes_keterampilan" value="tes_keterampilan" min="1" max="100" required>
             </div>
             <div class="form-group">
                 <label for="kesesuaian_budaya">Kesesuaian Budaya Perusahaan</label>
-                <input type="hidden" name="kriteria[]" value="Kesesuaian Budaya Perusahaan">
-                <input type="number" class="form-control" id="kesesuaian_budaya" name="nilai[]" min="1" max="100" required>
+                {{-- <input type="hidden" name="kriteria[]" value="Kesesuaian Budaya Perusahaan"> --}}
+                <input type="number" class="form-control" id="kesesuaian_budaya" name="kesesuaian_budaya" value="kesesuaian_budaya" min="1" max="100" required>
             </div>
             <div class="form-group">
                 <label for="wawancara">Wawancara</label>
-                <input type="hidden" name="kriteria[]" value="Wawancara">
-                <input type="number" class="form-control" id="wawancara" name="nilai[]" min="1" max="100" required>
+                {{-- <input type="hidden" name="kriteria[]" value="Wawancara"> --}}
+                <input type="number" class="form-control" id="wawancara" name="wawancara" value="wawancara" min="1" max="100" required>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

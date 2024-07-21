@@ -16,12 +16,11 @@ class KandidatController extends Controller
 {
     public function create()
     {
-        return view('kandidat.create');
+        return view('kandidat.create', ['kandidats' => KandidatXLowongan::all()]);
     }
 
     public function index()
     {
-        dd('tes');
         return view('kandidat.index', ['kandidats' => Kandidat::all()]);
     }
 
@@ -65,82 +64,96 @@ class KandidatController extends Controller
         $lowonganId = $request->input('lowongan_id');
         $lowongans = DB::table('lowongans')->get();
 
-        $kandidatsQuery = Kandidat::with('nilai')
-            ->join('kandidat_x_lowongan', 'kandidats.id', '=', 'kandidat_x_lowongan.kandidat_id')
-            ->join('lowongans', 'kandidat_x_lowongan.lowongan_id', '=', 'lowongans.id')
-            ->select('kandidats.*')
-            ->distinct();
+        // dd($kandidats);
 
+        // $kandidatsQuery = Kandidat::with('nilai')
+        //     ->join('kandidat_x_lowongan', 'kandidats.id', '=', 'kandidat_x_lowongan.kandidat_id')
+        //     ->join('lowongans', 'kandidat_x_lowongan.lowongan_id', '=', 'lowongans.id')
+        //     ->select('kandidats.*')
+        //     ->distinct();
+
+        // dd($lowonganId);
         if ($lowonganId) {
-            $kandidatsQuery->where('lowongans.id', '=', $lowonganId);
+            $kandidats = Nilai::select('kandidats.nama', 'nilais.nilai')
+                ->join('kandidats', 'nilais.kandidat_id', '=', 'kandidats.id')
+                ->join('kandidat_x_lowongan', 'kandidats.id', '=', 'kandidat_x_lowongan.kandidat_id')
+                ->where('kandidat_x_lowongan.lowongan_id', '=', $lowonganId)
+                ->orderByDesc('nilais.nilai')
+                ->get();
+        } else {
+            $kandidats = Nilai::select('kandidats.nama', 'nilais.nilai')
+                ->join('kandidats', 'nilais.kandidat_id', '=', 'kandidats.id')
+                ->join('kandidat_x_lowongan', 'kandidats.id', '=', 'kandidat_x_lowongan.kandidat_id')
+                ->orderByDesc('nilais.nilai')
+                ->get();
         }
 
-        $kandidats = $kandidatsQuery->get();
+        // $kandidats = $kandidatsQuery->get();
 
-        $weights = [
-            'Pengalaman Kerja' => 0.15,
-            'Pendidikan' => 0.1,
-            'Kepribadian dan Keterampilan' => 0.2,
-            'Referensi' => 0.05,
-            'Tes Keterampilan' => 0.1,
-            'Kesesuaian Budaya Perusahaan' => 0.1,
-            'Wawancara' => 0.3,
-        ];
+        // $weights = [
+        //     'Pengalaman Kerja' => 0.15,
+        //     'Pendidikan' => 0.1,
+        //     'Kepribadian dan Keterampilan' => 0.2,
+        //     'Referensi' => 0.05,
+        //     'Tes Keterampilan' => 0.1,
+        //     'Kesesuaian Budaya Perusahaan' => 0.1,
+        //     'Wawancara' => 0.3,
+        // ];
 
-        foreach ($kandidats as $kandidat) {
-            $score = 0;
-            $maxValues = [];
-            $minValues = [];
+        // foreach ($kandidats as $kandidat) {
+        //     $score = 0;
+        //     $maxValues = [];
+        //     $minValues = [];
 
-            foreach ($weights as $criteria => $weight) {
-                $maxValues[$criteria] = Nilai::where('kriteria', '=', $criteria)->max('nilai');
-                $minValues[$criteria] = Nilai::where('kriteria', '=', $criteria)->min('nilai');
-            }
+        //     foreach ($weights as $criteria => $weight) {
+        //         $maxValues[$criteria] = Nilai::where('kriteria', '=', $criteria)->max('nilai');
+        //         $minValues[$criteria] = Nilai::where('kriteria', '=', $criteria)->min('nilai');
+        //     }
 
-            if ($kandidat->nilai) {
-                foreach ($kandidat->nilai as $nilai) {
-                    $normalizedValue = 0;
-                    if (($nilai->nilai - $minValues[$nilai->kriteria]) != 0) {
-                        $normalizedValue = 100 * ($nilai->nilai - $minValues[$nilai->kriteria]) / ($maxValues[$nilai->kriteria] - $minValues[$nilai->kriteria]);
-                    }
+        //     if ($kandidat->nilai) {
+        //         foreach ($kandidat->nilai as $nilai) {
+        //             $normalizedValue = 0;
+        //             if (($nilai->nilai - $minValues[$nilai->kriteria]) != 0) {
+        //                 $normalizedValue = 100 * ($nilai->nilai - $minValues[$nilai->kriteria]) / ($maxValues[$nilai->kriteria] - $minValues[$nilai->kriteria]);
+        //             }
 
-                    $nilaiParameter = 0;
-                    foreach ($weights as $criteria => $weight) {
-                        if ($criteria === $nilai->kriteria) {
-                            $nilaiParameter = $weight;
-                            continue;
-                        }
-                    }
-                    $score += $normalizedValue * $nilaiParameter;
-                }
-            }
-            $kandidat->score = $score;
-        }
+        //             $nilaiParameter = 0;
+        //             foreach ($weights as $criteria => $weight) {
+        //                 if ($criteria === $nilai->kriteria) {
+        //                     $nilaiParameter = $weight;
+        //                     continue;
+        //                 }
+        //             }
+        //             $score += $normalizedValue * $nilaiParameter;
+        //         }
+        //     }
+        //     $kandidat->score = $score;
+        // }
 
-        $kandidats = $kandidats->sortByDesc('score');
+        // $kandidats = $kandidats->sortByDesc('score');
 
-        if ($request->has('download')) {
-            $spreadsheet = new Spreadsheet();
-            $sheet = $spreadsheet->getActiveSheet();
-            $sheet->setTitle('Ranking Kandidat');
+        // if ($request->has('download')) {
+        //     $spreadsheet = new Spreadsheet();
+        //     $sheet = $spreadsheet->getActiveSheet();
+        //     $sheet->setTitle('Ranking Kandidat');
 
-            $sheet->setCellValue('A1', 'Nama');
-            $sheet->setCellValue('B1', 'Score');
+        //     $sheet->setCellValue('A1', 'Nama');
+        //     $sheet->setCellValue('B1', 'Score');
 
-            $row = 2;
-            foreach ($kandidats as $kandidat) {
-                $sheet->setCellValue('A' . $row, $kandidat->nama);
-                $sheet->setCellValue('B' . $row, $kandidat->score);
-                $row++;
-            }
-            $writer = new Xlsx($spreadsheet);
-            $filename = 'ranking_kandidat.xlsx';
-            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-            header('Content-Disposition: attachment;filename="' . $filename . '"');
-            header('Cache-Control: max-age=0');
-            $writer->save('php://output');
-            exit;
-        }
+        //     $row = 2;
+        //     foreach ($kandidats as $kandidat) {
+        //         $sheet->setCellValue('A' . $row, $kandidat->nama);
+        //         $sheet->setCellValue('B' . $row, $kandidat->score);
+        //         $row++;
+        //     }
+        //     $writer = new Xlsx($spreadsheet);
+        //     $filename = 'ranking_kandidat.xlsx';
+        //     header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        //     header('Content-Disposition: attachment;filename="' . $filename . '"');
+        //     header('Cache-Control: max-age=0');
+        //     $writer->save('php://output');
+        //     exit;
+        // }
 
         return view('kandidat.rank', compact('kandidats', 'lowongans'));
     }
@@ -179,13 +192,12 @@ class KandidatController extends Controller
     public function getKandidatsByLowongan($lowonganId)
     {
         $kandidats = DB::table('kandidats')
-        ->join('kandidat_x_lowongan', 'kandidats.id', '=', 'kandidat_x_lowongan.kandidat_id')
-        ->join('lowongans', 'kandidat_x_lowongan.lowongan_id', '=', 'lowongans.id')
-        ->where('lowongans.id','=', $lowonganId)
-        ->select('kandidats.id', 'kandidats.nama')
-        ->get();
+            ->join('kandidat_x_lowongan', 'kandidats.id', '=', 'kandidat_x_lowongan.kandidat_id')
+            ->join('lowongans', 'kandidat_x_lowongan.lowongan_id', '=', 'lowongans.id')
+            ->where('lowongans.id', '=', $lowonganId)
+            ->select('kandidats.id', 'kandidats.nama')
+            ->get();
 
         return response()->json($kandidats);
     }
-
 }

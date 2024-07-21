@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Kandidat;
 use App\Models\KandidatXLowongan;
+use App\Models\lowongan;
 use Illuminate\Database\Seeder;
 
 class DBSeeder extends Seeder
@@ -64,7 +65,7 @@ class DBSeeder extends Seeder
         ];
 
         foreach ($jobPostings as $jobPosting) {
-            Lowongan::create($jobPosting);
+            lowongan::create($jobPosting);
         }
 
         $kandidats = Kandidat::whereBetween('id', [29, 53])->pluck('id')->toArray();
