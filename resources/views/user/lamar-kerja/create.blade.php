@@ -162,8 +162,8 @@
                 <input type="text" id="wa" name="wa" placeholder="Masukkan nomor WA" required>
             </div>
             <div class="form-group">
-                <label for="cv">Berkas CV</label>
-                <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" required>
+                <label for="cv">Link CV</label>
+                <input type="url" id="CV" name="CV" placeholder="Masukkan link CV" required>
             </div>
             <div class="form-group">
                 <label for="portofolio">Link Portofolio</label>
@@ -189,10 +189,10 @@
                     <div class="modal-body">
                         {{ session('success') }}
                     </div>
-                    <div class="modal-footer">
+                    <!-- <div class="modal-footer">
                         <a href="{{ route('kandidat.create') }}" class="btn btn-primary">Tetap di Halaman Input</a>
                         <a href="{{ route('penilaian.index') }}" class="btn btn-secondary">Lanjut ke Penilaian</a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

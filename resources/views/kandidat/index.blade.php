@@ -94,7 +94,7 @@
             </div>
             <nav>
                 <a href="{{ route('dashboard') }}">Dashboard</a>
-                <a href="{{ route('kandidat.create') }}">Input Data Kandidat</a>
+                <a href="{{ route('kandidat.create') }}">Data Kandidat</a>
                 <a href="#" class="active">Penilaian Kandidat</a>
                 <a href="{{ route('kandidat.rank') }}">Perankingan</a>
             </nav>

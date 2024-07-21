@@ -89,7 +89,7 @@
             </div>
             <nav>
                 <a href="#" class="active">Dashboard</a>
-                <a href="{{ route('kandidat.create') }}">Input Data Kandidat</a>
+                <a href="{{ route('kandidat.create') }}">Data Kandidat</a>
                 <a href="{{ route('penilaian.index') }}">Penilaian Kandidat</a>
                 <a href="{{ route('kandidat.rank') }}">Perankingan</a>
             </nav>
@@ -103,7 +103,7 @@
     </div>
     <div class="main-content">
     <h1>Selamat Datang,</h1>
-        <p>Gunakan menu Penilaian Kandidat untuk memberikan penilaian kepada setiap calon pegawai magang, dan menu Perankingan untuk melihat hasil perankingan.</p>
+        <p>Gunakan menu Penilaian Kandidat untuk memberikan penilaian kepada setiap pelamar, menu Data Kandidat untuk melihat detail data dari pelamar dan menu Perankingan untuk melihat hasil perankingan.</p>
     </div>
 </body>
 </html>

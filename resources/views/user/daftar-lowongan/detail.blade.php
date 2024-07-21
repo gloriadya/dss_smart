@@ -107,7 +107,7 @@
     <div class="sidebar">
         <div>
             <div class="logo">
-                <img src="images/logo.png" alt="Logo">
+                <img src="/images/logo.png" alt="Logo">
             </div>
             <nav>
                 <a href="#" class="active">Daftar Lowongan</a>

@@ -21,6 +21,7 @@ class KandidatController extends Controller
 
     public function index()
     {
+        dd('tes');
         return view('kandidat.index', ['kandidats' => Kandidat::all()]);
     }
 
@@ -35,7 +36,7 @@ class KandidatController extends Controller
         $kandidat->email = $request->input('email');
 
         $kandidat->save();
-        return redirect()->route('kandidat.create')->with('success', 'Kandidat berhasil disimpan! Silakan pilih opsi berikut.');
+        return redirect()->route('kandidat.create')->with('success', 'Berhasil mendaftar lowongan!');
     }
     public function createCriteria($id)
     {
@@ -172,7 +173,7 @@ class KandidatController extends Controller
 
         $relationTable->save();
 
-        return redirect()->route('isian-data-pelamar.create', $request->input('lowongan_id'))->with('success', 'Kandidat berhasil disimpan! Silakan pilih opsi berikut.');
+        return redirect()->route('isian-data-pelamar.create', $request->input('lowongan_id'))->with('success', 'Berhasil mendaftar lowongan!');
     }
 
     public function getKandidatsByLowongan($lowonganId)

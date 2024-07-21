@@ -10,6 +10,10 @@ use App\Http\Controllers\PenilaianController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/penilaian', [PenilaianController::class, 'index'])->name('penilaian.index');
+Route::get('/kandidat/rank', [KandidatController::class, 'rank'])->name('kandidat.rank');
+Route::get('/rank', [KandidatController::class, 'rank'])->name('kandidat.rank');
+
 Route::get('kandidat/create', [NilaiController::class, 'create']);
 Route::post('kandidat', [KandidatController::class, 'store'])->name('kandidat.store');
 Route::get('/register-kandidat', [KandidatController::class, 'create'])->name('register-kandidat');
@@ -30,10 +34,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::get('/register-kandidat', [KandidatController::class, 'create'])->name('register-kandidat');
     Route::get('/kandidat/{id}/criteria', [KandidatController::class, 'createCriteria'])->name('kandidat.createCriteria');
     Route::post('/kandidat/{id}/criteria', [KandidatController::class, 'storeCriteria'])->name('kandidat.storeCriteria');
-    Route::get('/kandidat/rank', [KandidatController::class, 'rank'])->name('kandidat.rank');
-
-    Route::get('/penilaian', [PenilaianController::class, 'index'])->name('penilaian.index');
-    Route::get('/rank', [KandidatController::class, 'rank'])->name('kandidat.rank');
+    
 
     // NILAI ROUTE
     Route::post('nilai', [NilaiController::class, 'store'])->name('nilai.store');
