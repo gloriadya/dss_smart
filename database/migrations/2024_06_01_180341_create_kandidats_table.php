@@ -20,6 +20,10 @@ class CreateKandidatsTable extends Migration
             $table->string('jenis_kelamin');
             $table->text('alamat');
             $table->string('email')->unique();
+            $table->string('no_wa');
+            $table->string('CV');
+            $table->string('portofolio');
+            $table->text('pengalaman_kerja');
             $table->timestamps();
         });
     }

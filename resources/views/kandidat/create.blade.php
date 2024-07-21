@@ -117,6 +117,9 @@
                     <th>Alamat</th>
                     <th>Email</th>
                     <th>No WA</th>
+                    <th>CV</th>
+                    <th>Portofolio</th>
+                    <th>Pengalaman Kerja</th>
                 </tr>
             </thead>
             <tbody>
@@ -129,6 +132,9 @@
                     <td>{{ $kandidat->kandidat->alamat }}</td>
                     <td>{{ $kandidat->kandidat->email }}</td>
                     <td>{{ $kandidat->kandidat->no_wa }}</td>
+                    <td>{{ $kandidat->kandidat->cv }}</td>
+                    <td>{{ $kandidat->kandidat->portofolio }}</td>
+                    <td>{{ $kandidat->kandidat->pengalaman_kerja }}</td>
                 </tr>
                 @endforeach
             </tbody>
