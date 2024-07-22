@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('kesesuaian_budaya');
             $table->integer('wawancara');
             // $table->unsignedBigInteger('kriteria_id');
-            // $table->double('nilai', 8, 2);
+            $table->double('nilai', 8, 2);
             $table->timestamps();
 
             // Foreign keys

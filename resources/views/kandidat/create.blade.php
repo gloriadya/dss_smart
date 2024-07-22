@@ -132,8 +132,8 @@
                     <td>{{ $kandidat->kandidat->alamat }}</td>
                     <td>{{ $kandidat->kandidat->email }}</td>
                     <td>{{ $kandidat->kandidat->no_wa }}</td>
-                    <td>{{ $kandidat->kandidat->cv }}</td>
-                    <td>{{ $kandidat->kandidat->portofolio }}</td>
+                    <td><a href="{{ $kandidat->kandidat->CV }}">{{ $kandidat->kandidat->CV }}</a></td>
+                    <td><a href="{{ $kandidat->kandidat->portofolio }}">{{ $kandidat->kandidat->portofolio }}</a></td>
                     <td>{{ $kandidat->kandidat->pengalaman_kerja }}</td>
                 </tr>
                 @endforeach
