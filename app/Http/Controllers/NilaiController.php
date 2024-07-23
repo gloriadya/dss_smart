@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Nilai;
 use App\Models\Kandidat;
+use Illuminate\Support\Facades\DB;
 
 class NilaiController extends Controller
 {
     public function store(Request $request)
     {
+        // dd($request);
         $validatedData = $request->validate([
             'lowongan_id' => 'required|exists:lowongans,id',
             'kandidat_id' => 'required|exists:kandidats,id',
@@ -31,7 +33,7 @@ class NilaiController extends Controller
             $validatedData['kesesuaian_budaya'] +
             $validatedData['wawancara']
         );
-    
+
         // Calculate the average score
         $nilai = $totalScore / 7;
 
@@ -69,4 +71,17 @@ class NilaiController extends Controller
         // Redirect back with a success message
         return redirect()->back()->with('success', 'Nilai kandidat berhasil disimpan.');
     }
+
+    public function getNilai($kandidatId)
+    {
+        $nilai = DB::table('nilai')->where('kandidat_id', $kandidatId)->first();
+    
+        // Cek jika nilai tidak ditemukan
+        if (!$nilai) {
+            return response()->json(['message' => 'Data not found'], 404);
+        }
+    
+        return response()->json($nilai);
+    }
+    
 }

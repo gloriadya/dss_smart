@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KandidatController;
+use App\Http\Controllers\NilaiController;
 use App\Http\Controllers\PageController;
 
 /*
@@ -18,5 +19,4 @@ use App\Http\Controllers\PageController;
 
 Route::middleware('auth:sanctum')->get('/user',[PageController::class, 'getUserAuth']);
 
-Route::get('/kandidats/{lowonganId}', [KandidatController::class, 'getKandidatsByLowongan']);
-
+Route::get('/kandidats/{lowonganId}/{year}', [KandidatController::class, 'getKandidatsByLowongan']);

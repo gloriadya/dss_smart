@@ -38,7 +38,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
     // NILAI ROUTE
     Route::post('nilai', [NilaiController::class, 'store'])->name('nilai.store');
-    Route::post('/nilai/store', [NilaiController::class, 'store'])->name('nilai.store');
+    // Route::post('/nilai/store', [NilaiController::class, 'store'])->name('nilai.store');
 
     // LOWONGAN ROUTE
     Route::get('/buat-lowongan', [LowonganController::class, 'buatLowonganView'])->name('lowongan.create');

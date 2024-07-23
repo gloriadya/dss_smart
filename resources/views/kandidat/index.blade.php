@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,6 +15,7 @@
             display: flex;
             min-height: 100vh;
         }
+
         .sidebar {
             background-color: #fff;
             color: #fff;
@@ -23,18 +25,22 @@
             flex-direction: column;
             justify-content: space-between;
         }
+
         .logo {
             margin-bottom: 20px;
             text-align: center;
         }
+
         .logo img {
             max-width: 100%;
         }
+
         nav {
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
+
         nav a {
             text-decoration: none;
             color: #3b4cca;
@@ -42,33 +48,41 @@
             border-radius: 5px;
             transition: background-color 0.3s ease;
         }
-        nav a:hover, nav a.active {
+
+        nav a:hover,
+        nav a.active {
             font-weight: bold;
             color: #fff;
             background-color: #3b4cca;
         }
+
         h1 {
             text-align: left;
             color: #333;
             font-size: 24px;
         }
+
         .main-content {
             background-color: #f9f9f9;
             flex: 1;
             padding: 40px;
         }
+
         .main-content h2 {
             font-size: 24px;
             margin-bottom: 10px;
         }
+
         .main-content p {
             font-size: 16px;
             color: #333;
         }
+
         .logout {
             text-align: center;
             margin-top: 20px;
         }
+
         .logout button {
             background: none;
             border: none;
@@ -76,9 +90,11 @@
             cursor: pointer;
             font-size: 16px;
         }
+
         .logout button:hover {
             color: red;
         }
+
         .btn-primary {
             color: #fff;
             background-color: #3b4cca;
@@ -86,6 +102,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="sidebar">
         <div>
@@ -108,17 +125,27 @@
     </div>
     <div class="main-content">
         <h1>Penilaian Kandidat</h1>
-        @if(session('success'))
+        @if (session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
         <form method="POST" action="{{ route('nilai.store') }}">
             @csrf
             <div class="form-group">
                 <label for="lowongan_id">Pilih Lowongan</label>
-                <select class="form-control" id="lowongan_id" name="lowongan_id" onchange="updateKandidatDropdown(this.value)">
+                <select class="form-control" id="lowongan_id" name="lowongan_id"
+                    onchange="updateKandidatDropdown()">
                     <option value="">Pilih Lowongan</option>
-                    @foreach($lowongans as $lowongan)
+                    @foreach ($lowongans as $lowongan)
                         <option value="{{ $lowongan->id }}">{{ $lowongan->judul }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="tahun">Pilih Tahun</label>
+                <select class="form-control" id="tahun" name="tahun" onchange="updateKandidatDropdown()">
+                    <option value="">Pilih Tahun</option>
+                    @foreach ($years as $year)
+                        <option value="{{ $year }}">{{ $year }}</option>
                     @endforeach
                 </select>
             </div>
@@ -131,45 +158,55 @@
             <div class="form-group">
                 <label for="pengalaman_kerja">Pengalaman Kerja (1-100)</label>
                 {{-- <input type="hidden" name="pengalaman_kerja" value="pengalaman_kerja"> --}}
-                <input type="number" class="form-control" id="pengalaman_kerja" name="pengalaman_kerja" value="pengalaman_kerja" min="1" max="100" required>
+                <input type="number" class="form-control" id="pengalaman_kerja" name="pengalaman_kerja"
+                    value="pengalaman_kerja" min="1" max="100" required>
             </div>
             <div class="form-group">
                 <label for="pendidikan">Pendidikan</label>
                 {{-- <input type="hidden" name="kriteria[]" value="Pendidikan"> --}}
-                <input type="number" class="form-control" id="pendidikan" name="pendidikan" value="pendidikan" min="1" max="100" required>
+                <input type="number" class="form-control" id="pendidikan" name="pendidikan" value="pendidikan"
+                    min="1" max="100" required>
             </div>
             <div class="form-group">
                 <label for="kepribadian_keterampilan">Kepribadian dan Keterampilan</label>
                 {{-- <input type="hidden" name="kriteria[]" value="Kepribadian dan Keterampilan"> --}}
-                <input type="number" class="form-control" id="kepribadian_keterampilan" name="kepribadian_keterampilan" value="kepribadian_keterampilan" min="1" max="100" required>
+                <input type="number" class="form-control" id="kepribadian_keterampilan" name="kepribadian_keterampilan"
+                    value="kepribadian_keterampilan" min="1" max="100" required>
             </div>
             <div class="form-group">
                 <label for="referensi">Referensi</label>
                 {{-- <input type="hidden" name="kriteria[]" value="Referensi"> --}}
-                <input type="number" class="form-control" id="referensi" name="referensi" value="referensi" min="1" max="100" required>
+                <input type="number" class="form-control" id="referensi" name="referensi" value="referensi"
+                    min="1" max="100" required>
             </div>
             <div class="form-group">
                 <label for="tes_keterampilan">Tes Keterampilan</label>
                 {{-- <input type="hidden" name="kriteria[]" value="Tes Keterampilan"> --}}
-                <input type="number" class="form-control" id="tes_keterampilan" name="tes_keterampilan" value="tes_keterampilan" min="1" max="100" required>
+                <input type="number" class="form-control" id="tes_keterampilan" name="tes_keterampilan"
+                    value="tes_keterampilan" min="1" max="100" required>
             </div>
             <div class="form-group">
                 <label for="kesesuaian_budaya">Kesesuaian Budaya Perusahaan</label>
                 {{-- <input type="hidden" name="kriteria[]" value="Kesesuaian Budaya Perusahaan"> --}}
-                <input type="number" class="form-control" id="kesesuaian_budaya" name="kesesuaian_budaya" value="kesesuaian_budaya" min="1" max="100" required>
+                <input type="number" class="form-control" id="kesesuaian_budaya" name="kesesuaian_budaya"
+                    value="kesesuaian_budaya" min="1" max="100" required>
             </div>
             <div class="form-group">
                 <label for="wawancara">Wawancara</label>
                 {{-- <input type="hidden" name="kriteria[]" value="Wawancara"> --}}
-                <input type="number" class="form-control" id="wawancara" name="wawancara" value="wawancara" min="1" max="100" required>
+                <input type="number" class="form-control" id="wawancara" name="wawancara" value="wawancara"
+                    min="1" max="100" required>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
 
     <script>
-        function updateKandidatDropdown(lowonganId) {
-            fetch(`/api/kandidats/${lowonganId}`)
+        function updateKandidatDropdown() {
+            const lowonganId = document.getElementById('lowongan_id').value;
+            const year = document.getElementById('tahun').value;
+    
+            fetch(`/api/kandidats/${lowonganId}/${year}`)
                 .then(response => response.json())
                 .then(data => {
                     let select = document.getElementById('kandidat_id');
@@ -180,5 +217,7 @@
                 });
         }
     </script>
+    
 </body>
+
 </html>

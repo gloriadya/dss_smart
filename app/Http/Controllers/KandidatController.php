@@ -42,22 +42,22 @@ class KandidatController extends Controller
         $kandidat = Kandidat::findOrFail($id);
         return view('kandidat.create', compact('kandidat'));
     }
-    public function storeCriteria(Request $request, $id)
-    {
-        $validatedData = $request->validate([
-            'kandidat_id' => 'required|exists:kandidats,id',
-            'kriteria' => 'required|string',
-            'nilai' => 'required|integer|min:1|max:100',
-        ]);
+    // public function storeCriteria(Request $request, $id)
+    // {
+    //     $validatedData = $request->validate([
+    //         'kandidat_id' => 'required|exists:kandidats,id',
+    //         'kriteria' => 'required|string',
+    //         'nilai' => 'required|integer|min:1|max:100',
+    //     ]);
 
-        $nilai = new Nilai();
-        $nilai->kandidat_id = $validatedData['kandidat_id'];
-        $nilai->kriteria = $validatedData['kriteria'];
-        $nilai->nilai = $validatedData['nilai'];
-        $nilai->save();
+    //     $nilai = new Nilai();
+    //     $nilai->kandidat_id = $validatedData['kandidat_id'];
+    //     $nilai->kriteria = $validatedData['kriteria'];
+    //     $nilai->nilai = $validatedData['nilai'];
+    //     $nilai->save();
 
-        return redirect()->back()->with('success', 'Nilai berhasil disimpan.');
-    }
+    //     return redirect()->back()->with('success', 'Nilai berhasil disimpan.');
+    // }
 
     public function rank(Request $request)
     {
@@ -193,15 +193,39 @@ class KandidatController extends Controller
         return redirect()->route('isian-data-pelamar.create', $request->input('lowongan_id'))->with('success', 'Berhasil mendaftar lowongan!');
     }
 
-    public function getKandidatsByLowongan($lowonganId)
+    // public function getKandidatsByLowongan($lowonganId, $year)
+    // {
+    //     $kandidats = DB::table('kandidats')
+    //         ->join('kandidat_x_lowongan', 'kandidats.id', '=', 'kandidat_x_lowongan.kandidat_id')
+    //         ->join('lowongans', 'kandidat_x_lowongan.lowongan_id', '=', 'lowongans.id')
+    //         ->where('lowongans.id', '=', $lowonganId)
+    //         ->whereYear('created_at', $year)
+    //         ->select('kandidats.id', 'kandidats.nama')
+    //         ->get();
+
+    //     return response()->json($kandidats);
+    // }
+
+    public function getKandidatsByLowongan($lowonganId, $year)
     {
-        $kandidats = DB::table('kandidats')
-            ->join('kandidat_x_lowongan', 'kandidats.id', '=', 'kandidat_x_lowongan.kandidat_id')
-            ->join('lowongans', 'kandidat_x_lowongan.lowongan_id', '=', 'lowongans.id')
-            ->where('lowongans.id', '=', $lowonganId)
+        $kandidats = DB::table('kandidat_x_lowongan')
+            ->join('kandidats', 'kandidat_x_lowongan.kandidat_id', '=', 'kandidats.id')
+            ->where('kandidat_x_lowongan.lowongan_id', $lowonganId)
+            ->whereYear('kandidat_x_lowongan.created_at', $year)
             ->select('kandidats.id', 'kandidats.nama')
             ->get();
-
+    
         return response()->json($kandidats);
     }
+    
+
+    // public function getKandidatsByLowongan($lowonganId, $year)
+    // {
+    //     $kandidats = DB::table('kandidat_x_lowongan')
+    //         ->where('lowongan_id', $lowonganId)
+    //         ->whereYear('created_at', $year)
+    //         ->get();
+
+    //     return response()->json($kandidats);
+    // }
 }
