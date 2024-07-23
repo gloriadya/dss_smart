@@ -88,8 +88,8 @@
             <div class="header">
                 <img src="images/logo.png" alt="PT Otak Kanan">
                 <div class="buttons">
-                    <a href="{{ route('dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Login HRD</a>
-                    <a href="{{ route('user.daftar-lowongan') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Form Pelamar</a>
+                    <a href="{{ route('register') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
+                    <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Login</a>
                 </div>
             </div>
 
@@ -100,5 +100,19 @@
             </div>
         </div>
     </div>
+
+    @auth
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var user = @json(Auth::user()); 
+
+            if (user.is_admin === 1) {
+                window.location.href = "{{ route('dashboard') }}";
+            } else {
+                window.location.href = "{{ route('user.daftar-lowongan') }}";
+            }
+        });
+    </script>
+    @endauth
 </body>
 </html>
