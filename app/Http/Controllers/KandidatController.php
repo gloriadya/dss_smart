@@ -62,31 +62,46 @@ class KandidatController extends Controller
     public function rank(Request $request)
     {
         $lowonganId = $request->input('lowongan_id');
+        $year = $request->input('year');
         $lowongans = DB::table('lowongans')->get();
 
-        // dd($kandidats);
+        $query = Nilai::select('kandidats.nama', 'nilais.nilai')
+            ->join('kandidats', 'nilais.kandidat_id', '=', 'kandidats.id')
+            ->join('kandidat_x_lowongan', 'kandidats.id', '=', 'kandidat_x_lowongan.kandidat_id');
 
-        // $kandidatsQuery = Kandidat::with('nilai')
-        //     ->join('kandidat_x_lowongan', 'kandidats.id', '=', 'kandidat_x_lowongan.kandidat_id')
-        //     ->join('lowongans', 'kandidat_x_lowongan.lowongan_id', '=', 'lowongans.id')
-        //     ->select('kandidats.*')
-        //     ->distinct();
-
-        // dd($lowonganId);
         if ($lowonganId) {
-            $kandidats = Nilai::select('kandidats.nama', 'nilais.nilai')
-                ->join('kandidats', 'nilais.kandidat_id', '=', 'kandidats.id')
-                ->join('kandidat_x_lowongan', 'kandidats.id', '=', 'kandidat_x_lowongan.kandidat_id')
-                ->where('kandidat_x_lowongan.lowongan_id', '=', $lowonganId)
-                ->orderByDesc('nilais.nilai')
-                ->get();
-        } else {
-            $kandidats = Nilai::select('kandidats.nama', 'nilais.nilai')
-                ->join('kandidats', 'nilais.kandidat_id', '=', 'kandidats.id')
-                ->join('kandidat_x_lowongan', 'kandidats.id', '=', 'kandidat_x_lowongan.kandidat_id')
-                ->orderByDesc('nilais.nilai')
-                ->get();
+            $query->where('kandidat_x_lowongan.lowongan_id', '=', $lowonganId);
         }
+
+        if ($year) {
+            $query->whereYear('kandidat_x_lowongan.created_at', '=', $year);
+        }
+
+        $kandidats = $query->orderByDesc('nilais.nilai')->get();
+
+        $years = DB::table('kandidat_x_lowongan')
+            ->selectRaw('YEAR(created_at) as year')
+            ->groupBy('year')
+            ->get()
+            ->pluck('year');
+
+        // $lowonganId = $request->input('lowongan_id');
+        // $lowongans = DB::table('lowongans')->get();
+
+        // if ($lowonganId) {
+        //     $kandidats = Nilai::select('kandidats.nama', 'nilais.nilai')
+        //         ->join('kandidats', 'nilais.kandidat_id', '=', 'kandidats.id')
+        //         ->join('kandidat_x_lowongan', 'kandidats.id', '=', 'kandidat_x_lowongan.kandidat_id')
+        //         ->where('kandidat_x_lowongan.lowongan_id', '=', $lowonganId)
+        //         ->orderByDesc('nilais.nilai')
+        //         ->get();
+        // } else {
+        //     $kandidats = Nilai::select('kandidats.nama', 'nilais.nilai')
+        //         ->join('kandidats', 'nilais.kandidat_id', '=', 'kandidats.id')
+        //         ->join('kandidat_x_lowongan', 'kandidats.id', '=', 'kandidat_x_lowongan.kandidat_id')
+        //         ->orderByDesc('nilais.nilai')
+        //         ->get();
+        // }
 
         // $kandidats = $kandidatsQuery->get();
 
@@ -155,7 +170,7 @@ class KandidatController extends Controller
         //     exit;
         // }
 
-        return view('kandidat.rank', compact('kandidats', 'lowongans'));
+        return view('kandidat.rank', compact('kandidats', 'lowongans', 'years'));
     }
 
     public function isianBerkasLamaran($id)
@@ -214,10 +229,10 @@ class KandidatController extends Controller
             ->whereYear('kandidat_x_lowongan.created_at', $year)
             ->select('kandidats.id', 'kandidats.nama')
             ->get();
-    
+
         return response()->json($kandidats);
     }
-    
+
 
     // public function getKandidatsByLowongan($lowonganId, $year)
     // {
