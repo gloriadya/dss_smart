@@ -1,118 +1,84 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
     <title>Sistem Pendukung Keputusan</title>
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-    <style>
-        body {
-            font-family: 'figtree', sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            background-color: #f9f9f9;
-        }
-        .header {
-            width: 100%;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #fff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .header img {
-            height: 50px;
-        }
-        .header .buttons {
-            display: flex;
-            gap: 20px;
-        }
-        .header .buttons a {
-            text-decoration: none;
-            color: #fff;
-            background-color: #1d4ed8;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-weight: 600;
-        }
-        .content {
-            text-align: center;
-            padding: 40px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        .content img {
-            width: 60%;
-            max-width: 500px;
-            margin-bottom: 20px;
-        }
-        .content h1 {
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-        .content p {
-            font-size: 18px;
-            color: #4b5563;
-            max-width: 1000px;
-        }
-        .antialiased {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-    </style>
+
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
+
+    <link href="css/style.css" rel="stylesheet" />
 </head>
-<body class="antialiased">
-    <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-        @if (Route::has('login'))
-            <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
-                @auth
-                @else
-                    @if (Route::has('register'))
-                    @endif
-                @endauth
-            </div>
-        @endif
-        <div class="flex flex-col w-full">
-            <div class="header">
-                <img src="images/logo.png" alt="PT Otak Kanan">
-                <div class="buttons">
-                    <a href="{{ route('register') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
-                    <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Login</a>
+
+<body class="d-flex flex-column h-100">
+    <main class="flex-shrink-0">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+            <div class="container px-5">
+                <a class="navbar-brand" href="/"><img src="images/logo.png" alt="PT Otak Kanan"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation"><span
+                        class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
+                        <li><a class="btn btn-primary btn-lg px-4 py-2 me-sm-3 fs-6 fw-bolder"
+                                href="{{ route('register') }}">Register</a></li>
+                        <li><a class="btn btn-primary btn-lg px-4 py-2 me-sm-3 fs-6 fw-bolder"
+                                href="{{ route('login') }}">Login</a></li>
+                    </ul>
                 </div>
             </div>
-
-            <div class="content">
-                <img src="images/illustration.png" alt="Decision Support System">
-                <h1>Decision Support System</h1>
-                <p>Sistem ini dirancang untuk mempermudah manajemen dalam mengelola dan menganalisis nilai seleksi, sehingga dapat meningkatkan kualitas keputusan dan mempercepat proses seleksi calon pegawai magang di PT Otak Kanan.</p>
+        </nav>
+        <header class="py-5">
+            <div class="container px-5 pb-5">
+                <div class="row m-xl-auto">
+                    <div class="col-xxl-5">
+                        <div class="text-center text-xxl-start">
+                            <h1 class="display-4 fw-bolder mb-5"><span class="text-gradient d-inline">Decision Support
+                                    System</span></h1>
+                            <div class="fs-5 font-weight-normal text-muted">
+                                <p>Sistem ini dirancang untuk mempermudah manajemen dalam mengelola dan menganalisis
+                                    nilai seleksi, sehingga dapat meningkatkan kualitas keputusan dan mempercepat proses
+                                    seleksi calon pegawai magang di PT Otak Kanan.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 mx-lg-5">
+                        <div class="d-flex mt-5 mt-xxl-0">
+                            <div>
+                                <img width="100%" src="/images/illustration.png" alt="..." />
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
+        </header>
 
-    @auth
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var user = @json(Auth::user()); 
-
-            if (user.is_admin === 1) {
-                window.location.href = "{{ route('dashboard') }}";
-            } else {
-                window.location.href = "{{ route('user.daftar-lowongan') }}";
-            }
-        });
-    </script>
-    @endauth
+        <section class="bg-light py-5">
+            <div class="container px-5">
+                <div class="row gx-5 justify-content-center">
+                    <div class="col-xxl-8">
+                        <div class="text-center my-5">
+                            <h2 class="display-8 fw-bolder"><span class="text-gradient d-inline">About PT. Otak Kanan - Indonesia</span></h2>
+                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit
+                                dolorum itaque qui unde quisquam consequatur autem. Eveniet quasi nobis aliquid cumque
+                                officiis sed rem iure ipsa! Praesentium ratione atque dolorem?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 </body>
+
 </html>

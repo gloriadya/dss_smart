@@ -33,7 +33,7 @@
         }
 
         .container h1 span:last-child {
-            color: #1a1aff;
+            color: #F59A09;
         }
 
         .form-group {
@@ -52,11 +52,11 @@
 
         .form-group input:focus {
             outline: none;
-            border-color: #1a1aff;
+            border-color: #F59A09;
         }
 
         .btn {
-            background-color: #1a1aff;
+            background-color: #F59A09;
             color: white;
             padding: 10px 30px;
             border: none;
@@ -66,7 +66,7 @@
         }
 
         .btn:hover {
-            background-color: #0000e6;
+            background-color: #F59A09;
         }
     </style>
 </head>
@@ -119,7 +119,7 @@
         
         <div class="flex items-center justify-end" style="margin-top: 10px">
             Already Registered?
-            <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Login</a>      
+            <a href="{{ route('login') }}" style="text-decoration: none" class="font-semibold">Login</a>      
         </div>
     </div>
 </body>

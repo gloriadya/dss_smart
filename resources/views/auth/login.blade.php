@@ -33,7 +33,7 @@
         }
 
         .container h1 span:last-child {
-            color: #1a1aff;
+            color: #F59A09;
         }
 
         .form-group {
@@ -50,11 +50,11 @@
 
         .form-group input:focus {
             outline: none;
-            border-color: #1a1aff;
+            border-color: #F59A09;
         }
 
         .btn {
-            background-color: #1a1aff;
+            background-color: #F59A09;
             color: white;
             padding: 10px 30px;
             border: none;
@@ -64,7 +64,7 @@
         }
 
         .btn:hover {
-            background-color: #0000e6;
+            background-color: #F59A09;
         }
     </style>
 </head>
