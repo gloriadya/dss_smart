@@ -72,7 +72,7 @@ class LowonganController extends Controller
                 ->get();
         }
 
-        return view('admin.lowongan.list', compact('lowongans'))->with('success', 'Lowongan berhasil ditambahkan.');
+        return redirect()->route('lowongan.index', compact('lowongans'))->with('success', 'Lowongan berhasil ditambahkan.');
     }
 
     public function listLowonganView(Request $request)

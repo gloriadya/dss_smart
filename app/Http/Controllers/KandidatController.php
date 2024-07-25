@@ -18,13 +18,15 @@ class KandidatController extends Controller
     {
         $kandidats = KandidatXLowongan::all();
 
+        $lowongans = DB::table('lowongans')->get();
+
         $years = DB::table('kandidat_x_lowongan')
         ->selectRaw('YEAR(created_at) as year')
         ->groupBy('year')
         ->get()
         ->pluck('year');
 
-        return view('kandidat.create', compact('kandidats', 'years'));
+        return view('kandidat.create', compact('kandidats', 'lowongans', 'years'));
     }
 
     public function index()

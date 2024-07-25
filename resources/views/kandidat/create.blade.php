@@ -7,8 +7,8 @@
             <label for="lowongan_id">Pilih Lowongan</label>
             <select class="form-control" id="lowongan_id" name="lowongan_id">
                 <option value="">Pilih Lowongan</option>
-                @foreach ($kandidats as $kandidat)
-                    <option value="{{ $kandidat->lowongan->id }}">{{ $kandidat->lowongan->judul }}</option>
+                @foreach ($lowongans as $lowongan)
+                    <option value="{{ $lowongan->id }}">{{ $lowongan->judul }}</option>
                 @endforeach
             </select>
         </div>
