@@ -16,7 +16,15 @@ class KandidatController extends Controller
 {
     public function create()
     {
-        return view('kandidat.create', ['kandidats' => KandidatXLowongan::all()]);
+        $kandidats = KandidatXLowongan::all();
+
+        $years = DB::table('kandidat_x_lowongan')
+        ->selectRaw('YEAR(created_at) as year')
+        ->groupBy('year')
+        ->get()
+        ->pluck('year');
+
+        return view('kandidat.create', compact('kandidats', 'years'));
     }
 
     public function index()

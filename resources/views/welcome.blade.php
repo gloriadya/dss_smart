@@ -20,20 +20,20 @@
     <link href="css/style.css" rel="stylesheet" />
 </head>
 
-<body class="d-flex flex-column h-100">
+<body class="d-flex flex-column">
     <main class="flex-shrink-0">
-        <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white">
             <div class="container px-5">
-                <a class="navbar-brand" href="/"><img src="images/logo.png" alt="PT Otak Kanan"></a>
+                <a class="navbar-brand" href="/"><img src="images/logo.png" width="70%" alt="PT Otak Kanan"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation"><span
                         class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
-                        <li><a class="btn btn-primary btn-lg px-4 py-2 me-sm-3 fs-6 fw-bolder"
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li><a class="btn btn-primary px-3 py-1 me-sm-3" style="border-radius: 100px;"
                                 href="{{ route('register') }}">Register</a></li>
-                        <li><a class="btn btn-primary btn-lg px-4 py-2 me-sm-3 fs-6 fw-bolder"
+                        <li><a class="btn btn-secondary px-4 py-1 me-sm-3" style="border-radius: 100px"
                                 href="{{ route('login') }}">Login</a></li>
                     </ul>
                 </div>
