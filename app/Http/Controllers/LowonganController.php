@@ -56,7 +56,23 @@ class LowonganController extends Controller
         $lowongan->tanggal_ditutup = $request->tanggal_ditutup;
         $lowongan->save();
 
-        return view('admin.lowongan.create')->with('success', 'Lowongan berhasil ditambahkan.');
+        $filter = $request->input('filter');
+
+        if ($filter == 'active') {
+            $lowongans = Lowongan::where('tanggal_ditutup', '>=', now())
+                ->orWhereNull('tanggal_ditutup')
+                ->orderBy('tanggal_dibuka', 'desc')
+                ->get();
+        } elseif ($filter == 'closed') {
+            $lowongans = Lowongan::where('tanggal_ditutup', '<', now())
+                ->orderBy('tanggal_ditutup', 'desc')
+                ->get();
+        } else {
+            $lowongans = Lowongan::orderBy('tanggal_dibuka', 'desc')
+                ->get();
+        }
+
+        return view('admin.lowongan.list', compact('lowongans'))->with('success', 'Lowongan berhasil ditambahkan.');
     }
 
     public function listLowonganView(Request $request)
