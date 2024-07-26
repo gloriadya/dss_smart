@@ -48,7 +48,7 @@
         <!-- Download Button -->
         <form method="GET" action="{{ route('kandidat.rank') }}">
             <input type="hidden" name="download" value="true">
-            <button type="submit" class="btn btn-success">Unduh Hasil Perangkingan</button>
+            <button type="submit" class="btn btn-secondary">Unduh Hasil Perangkingan</button>
         </form>
 
         @if($kandidats->isEmpty())

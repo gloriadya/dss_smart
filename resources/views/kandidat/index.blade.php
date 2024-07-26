@@ -75,7 +75,7 @@
                 <input type="number" class="form-control" id="wawancara" name="wawancara" value="wawancara"
                     min="1" max="100" required>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-secondary">Submit</button>
         </form>
     </div>
 

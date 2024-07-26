@@ -38,20 +38,27 @@
                 </thead>
                 <tbody>
                     @foreach ($lowongans as $lowongan)
-                        <tr>
+                        <tr
+                            style="{{ \Carbon\Carbon::parse($lowongan->tanggal_ditutup)->isPast() ? 'background-color: #bdb8ad;' : '' }}">
                             <td>{{ $lowongan->judul }}</td>
                             <td>{{ $lowongan->deskripsi }}</td>
                             <td>{{ $lowongan->lokasi }}</td>
                             <td>{{ $lowongan->tanggal_dibuka }}</td>
                             <td>{{ $lowongan->tanggal_ditutup }}</td>
                             <td>
-                                <a href="{{ route('lowongan.edit', $lowongan->id) }}"
-                                    class="btn btn-primary btn-sm px-3 py-1" style="border-radius: 10px">Edit</a>
-                                <form action="{{ route('lowongan.close', $lowongan->id) }}" method="POST"
-                                    style="display:inline;">
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger btn-sm mt-2" style="border-radius: 10px">Tutup</button>
-                                </form>
+                                @if (\Carbon\Carbon::parse($lowongan->tanggal_ditutup)->isPast())
+                                    <span class="badge bg-dark text-light fw-normal" style="font-size: 0.7rem">Ditutup</span>
+                                @else
+                                    <a href="{{ route('lowongan.edit', $lowongan->id) }}"
+                                        class="btn btn-primary btn-sm px-2"
+                                        style="border-radius: 10px; font-size:0.7rem">Edit</a>
+                                    <form action="{{ route('lowongan.close', $lowongan->id) }}" method="POST"
+                                        style="display:inline;">
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger btn-sm px-2 mt-2"
+                                            style="border-radius: 10px; font-size:0.7rem">Tutup</button>
+                                    </form>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

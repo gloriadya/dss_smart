@@ -54,19 +54,19 @@
                         <td>{{ $kandidat->kandidat->pengalaman_kerja }}</td>
                         <td style="align-items: center; text-align:center">
                             @if ($kandidat->kandidat->lolos_berkas === 1)
-                                Lolos
+                                <span class="badge bg-light text-primary" style="font-size: 0.7rem">Lolos</span>
                             @elseif ($kandidat->kandidat->lolos_berkas === 0)
-                                Tidak Lolos
+                                <span class="badge bg-light text-secondary" style="font-size: 0.7rem">Tidak Lolos</span>
                             @else
                                 <form action="{{ route('kandidat.lolos', $kandidat->kandidat->id) }}" method="POST">
                                     @csrf
-                                    <button type="submit" class="btn btn-secondary px-3 py-1 mb-2"
-                                        style="border-radius: 100px;">Lolos</button>
+                                    <button type="submit" class="btn btn-primary px-3 mb-2 fw-semibold"
+                                        style="border-radius: 100px; font-size: 0.7rem">Lolos</button>
                                 </form>
                                 <form action="{{ route('kandidat.gagal', $kandidat->kandidat->id) }}" method="POST">
                                     @csrf
-                                    <button type="submit" class="btn btn-danger px-3 py-1"
-                                        style="border-radius: 100px">Gagal</button>
+                                    <button type="submit" class="btn btn-danger px-3 fw-semibold"
+                                        style="border-radius: 100px; font-size: 0.7rem">Gagal</button>
                                 </form>
                             @endif
                         </td>
