@@ -52,22 +52,24 @@
                         <td style="text-align: center"><a href="{{ $kandidat->kandidat->portofolio }}"><img
                                     src="/images/CV_Porto.png" width="20px" height="25px" /></a></td>
                         <td>{{ $kandidat->kandidat->pengalaman_kerja }}</td>
-                        <td style="align-items: center; text-align:center">
+                        <td>
                             @if ($kandidat->kandidat->lolos_berkas === 1)
                                 <span class="badge bg-light text-primary" style="font-size: 0.7rem">Lolos</span>
                             @elseif ($kandidat->kandidat->lolos_berkas === 0)
                                 <span class="badge bg-light text-secondary" style="font-size: 0.7rem">Tidak Lolos</span>
                             @else
-                                <form action="{{ route('kandidat.lolos', $kandidat->kandidat->id) }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn btn-primary px-3 mb-2 fw-semibold"
-                                        style="border-radius: 100px; font-size: 0.7rem">Lolos</button>
-                                </form>
-                                <form action="{{ route('kandidat.gagal', $kandidat->kandidat->id) }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger px-3 fw-semibold"
-                                        style="border-radius: 100px; font-size: 0.7rem">Gagal</button>
-                                </form>
+                                <div style="display: flex; gap: 5px;">
+                                    <form action="{{ route('kandidat.lolos', $kandidat->kandidat->id) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn btn-primary py-1 px-2 fw-semibold"
+                                            style="border-radius: 100px; font-size: 1rem"><i class="bi bi-check-lg"></i></button>
+                                    </form>
+                                    <form action="{{ route('kandidat.gagal', $kandidat->kandidat->id) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger py-1 px-2 fw-semibold"
+                                            style="border-radius: 100px; font-size: 1rem"><i class="bi bi-x"></i></button>
+                                    </form>
+                                </div>
                             @endif
                         </td>
 

@@ -49,17 +49,20 @@
                                 @if (\Carbon\Carbon::parse($lowongan->tanggal_ditutup)->isPast())
                                     <span class="badge bg-dark text-light fw-normal" style="font-size: 0.7rem">Ditutup</span>
                                 @else
-                                    <a href="{{ route('lowongan.edit', $lowongan->id) }}"
-                                        class="btn btn-primary btn-sm px-2"
-                                        style="border-radius: 10px; font-size:0.7rem">Edit</a>
-                                    <form action="{{ route('lowongan.close', $lowongan->id) }}" method="POST"
-                                        style="display:inline;">
-                                        @csrf
-                                        <button type="submit" class="btn btn-danger btn-sm px-2 mt-2"
-                                            style="border-radius: 10px; font-size:0.7rem">Tutup</button>
-                                    </form>
+                                    <div style="display: flex; gap: 5px;">
+                                        <a href="{{ route('lowongan.edit', $lowongan->id) }}" class="btn btn-primary btn-sm px-2" style="border-radius: 10px; font-size:0.7rem">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+                                        <form action="{{ route('lowongan.close', $lowongan->id) }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger btn-sm px-2" style="border-radius: 10px; font-size:0.7rem">
+                                                <i class="bi bi-trash3"></i>
+                                            </button>
+                                        </form>
+                                    </div>
                                 @endif
                             </td>
+                            
                         </tr>
                     @endforeach
                 </tbody>
