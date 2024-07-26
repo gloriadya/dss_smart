@@ -69,10 +69,8 @@
                 <div class="row gx-5 justify-content-center">
                     <div class="col-xxl-8">
                         <div class="text-center my-5">
-                            <h2 class="display-8 fw-bolder"><span class="text-gradient d-inline">About PT. Otak Kanan - Indonesia</span></h2>
-                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit
-                                dolorum itaque qui unde quisquam consequatur autem. Eveniet quasi nobis aliquid cumque
-                                officiis sed rem iure ipsa! Praesentium ratione atque dolorem?</p>
+                            <h2 class="display-8 fw-bolder"><span class="text-gradient d-inline">About PT Otak Kanan - Indonesia</span></h2>
+                            <p class="text-muted">Lebih dari 10 tahun sejak berdiri tahun 2009 PT Otak Kanan telah menjalankan usaha dengan penuh kreativitas hingga kini menjadi perusahaan teknologi digital yang telah melayani ribuan pelanggan dari berbagai segmen pasar dan menjadi solusi bagi pribadi maupun perusahaan yang ingin bertransformasi menjadi lebih baik dan berkelanjutan.</p>
                         </div>
                     </div>
                 </div>
