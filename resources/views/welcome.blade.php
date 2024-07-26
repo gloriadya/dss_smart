@@ -41,11 +41,10 @@
         </nav>
         <header class="py-5">
             <div class="container px-5 pb-5">
-                <div class="row m-xl-auto">
-                    <div class="col-lg-7">
+                <div class="row align-items-center"> 
+                    <div class="col-lg-6 mb-5 mb-lg-0">
                         <div class="text-xxl-start">
-                            <h1 class="display-5 fw-bolder mb-5"><span class="text-gradient d-inline">Decision Support
-                                    System</span></h1>
+                            <h1 class="display-5 fw-bolder mb-3"><span class="text-gradient d-inline">Aplikasi Seleksi Pegawai Magang</span></h1>
                             <div class="fs-6 font-weight-normal text-muted">
                                 <p>Sistem ini dirancang untuk mempermudah manajemen dalam mengelola dan menganalisis
                                     nilai seleksi, sehingga dapat meningkatkan kualitas keputusan dan mempercepat proses
@@ -53,8 +52,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-5">
-                        <div class="d-flex mt-5 mt-xxl-0">
+                    <div class="col-lg-6">
+                        <div class="d-flex justify-content-center">
                             <div>
                                 <img width="100%" src="/images/illustration.png" alt="..." />
                             </div>
@@ -69,7 +68,7 @@
                 <div class="row gx-5 justify-content-center">
                     <div class="col-xxl-8">
                         <div class="text-center my-5">
-                            <h2 class="display-8 fw-bolder"><span class="text-gradient d-inline">About PT Otak Kanan - Indonesia</span></h2>
+                            <h3 class="display-8 fw-bolder"><span class="text-gradient d-inline">Tentang PT Otak Kanan - Indonesia</span></h3>
                             <p class="text-muted">Lebih dari 10 tahun sejak berdiri tahun 2009 PT Otak Kanan telah menjalankan usaha dengan penuh kreativitas hingga kini menjadi perusahaan teknologi digital yang telah melayani ribuan pelanggan dari berbagai segmen pasar dan menjadi solusi bagi pribadi maupun perusahaan yang ingin bertransformasi menjadi lebih baik dan berkelanjutan.</p>
                         </div>
                     </div>
