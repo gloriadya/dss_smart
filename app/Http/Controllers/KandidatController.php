@@ -7,8 +7,7 @@ use App\Models\KandidatXLowongan;
 use App\Models\Lowongan;
 use App\Models\Nilai;
 use Illuminate\Http\Request;
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 
@@ -34,19 +33,20 @@ class KandidatController extends Controller
         return view('kandidat.index', ['kandidats' => Kandidat::all()]);
     }
 
-    public function store(Request $request)
-    {
-        $kandidat = new Kandidat();
+    // public function store(Request $request)
+    // {
+    //     $kandidat = new Kandidat();
 
-        $kandidat->nama = $request->input('nama');
-        $kandidat->jurusan = $request->input('jurusan');
-        $kandidat->jenis_kelamin = $request->input('jenis_kelamin');
-        $kandidat->alamat = $request->input('alamat');
-        $kandidat->email = $request->input('email');
+    //     $kandidat->nama = $request->input('nama');
+    //     $kandidat->jurusan = $request->input('jurusan');
+    //     $kandidat->jenis_kelamin = $request->input('jenis_kelamin');
+    //     $kandidat->alamat = $request->input('alamat');
+    //     $kandidat->email = $request->input('email');
+    //     $kandidat->no_wa = $request->input('no_wa');
 
-        $kandidat->save();
-        return redirect()->route('kandidat.create')->with('success', 'Berhasil mendaftar lowongan!');
-    }
+    //     $kandidat->save();
+    //     return redirect()->route('kandidat.create')->with('success', 'Berhasil mendaftar lowongan!');
+    // }
     public function createCriteria($id)
     {
         $kandidat = Kandidat::findOrFail($id);
@@ -195,6 +195,7 @@ class KandidatController extends Controller
 
         $kandidat = new Kandidat();
 
+        $kandidat->user_id = Auth::user()->id;
         $kandidat->nama = $request->input('nama');
         $kandidat->jurusan = $request->input('jurusan');
         $kandidat->jenis_kelamin = $request->input('jenis_kelamin');
@@ -204,6 +205,7 @@ class KandidatController extends Controller
         $kandidat->cv = $request->input('cv');
         $kandidat->portofolio = $request->input('portofolio');
         $kandidat->pengalaman_kerja = $request->input('pengalaman_kerja');
+        $kandidat->sudah_daftar = true;
 
         $kandidat->save();
 
@@ -215,7 +217,7 @@ class KandidatController extends Controller
 
         $relationTable->save();
 
-        return redirect()->route('isian-data-pelamar.create', $request->input('lowongan_id'))->with('success', 'Berhasil mendaftar lowongan!');
+        return redirect()->route('user.daftar-lowongan')->with('success', 'Berhasil mendaftar lowongan!');
     }
 
     // public function getKandidatsByLowongan($lowonganId, $year)

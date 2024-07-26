@@ -15,15 +15,19 @@ class CreateKandidatsTable extends Migration
     {
         Schema::create('kandidats', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->foreignId('user_id');
             $table->string('nama');
             $table->string('jurusan');
             $table->string('jenis_kelamin');
             $table->text('alamat');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('no_wa');
             $table->string('CV');
             $table->string('portofolio');
             $table->text('pengalaman_kerja');
+            $table->boolean('sudah_daftar')->nullable();
+            $table->boolean('lolos_berkas')->nullable();
+            $table->boolean('sudah_dinilai')->nullable();
             $table->timestamps();
         });
     }

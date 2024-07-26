@@ -4,9 +4,9 @@
     <div class="main-content">
         <div class="row">
             <div class="d-flex align-items-center justify-content-between mb-4">
-                <h2 class="display-5 fw-bolder text-gradient d-inline">Lowongan Magang</h2>
+                <h2 class="display-4 fw-bolder text-gradient d-inline">Lowongan Magang</h2>
             </div>
-            <div class="card-container">
+            <div class="card-container justify-content-start">
                 @foreach ($jobPostings as $jobPosting)
                     <div class="card shadow border-0 rounded-4 mb-2">
                         <div class="card-body">

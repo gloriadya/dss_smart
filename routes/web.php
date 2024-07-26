@@ -35,6 +35,8 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::get('/kandidat/{id}/criteria', [KandidatController::class, 'createCriteria'])->name('kandidat.createCriteria');
     Route::post('/kandidat/{id}/criteria', [KandidatController::class, 'storeCriteria'])->name('kandidat.storeCriteria');
     
+    Route::post('/kandidat-lolos/{id}', [LowonganController::class, 'lolos'])->name('kandidat.lolos');
+    Route::post('/kandidat-gagal/{id}', [LowonganController::class, 'gagal'])->name('kandidat.gagal');
 
     // NILAI ROUTE
     Route::post('nilai', [NilaiController::class, 'store'])->name('nilai.store');
@@ -60,6 +62,7 @@ Route::middleware('auth')->group(function () {
 Route::group(['middleware' => ['auth', 'user']], function () {
     Route::get('/daftar-lowongan', [LowonganController::class, 'index'])->name('user.daftar-lowongan');
     Route::get('/daftar-lowongan/{id}', [LowonganController::class, 'show'])->name('user.detail-job');
+    Route::get('/status/{id}', [LowonganController::class, 'status'])->name('user.status');
 
     Route::get('/isian-data-pelamar/{id}', [KandidatController::class, 'isianBerkasLamaran'])->name('isian-data-pelamar.create');
     Route::post('/isian-data-pelamar', [KandidatController::class, 'isianBerkasLamaranStore'])->name('isian-data-pelamar.store');

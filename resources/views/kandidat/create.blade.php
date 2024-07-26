@@ -34,6 +34,7 @@
                     <th>CV</th>
                     <th>Portofolio</th>
                     <th>Pengalaman Kerja</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -51,6 +52,25 @@
                         <td style="text-align: center"><a href="{{ $kandidat->kandidat->portofolio }}"><img
                                     src="/images/CV_Porto.png" width="20px" height="25px" /></a></td>
                         <td>{{ $kandidat->kandidat->pengalaman_kerja }}</td>
+                        <td style="align-items: center; text-align:center">
+                            @if ($kandidat->kandidat->lolos_berkas === 1)
+                                Lolos
+                            @elseif ($kandidat->kandidat->lolos_berkas === 0)
+                                Tidak Lolos
+                            @else
+                                <form action="{{ route('kandidat.lolos', $kandidat->kandidat->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-secondary px-3 py-1 mb-2"
+                                        style="border-radius: 100px;">Lolos</button>
+                                </form>
+                                <form action="{{ route('kandidat.gagal', $kandidat->kandidat->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger px-3 py-1"
+                                        style="border-radius: 100px">Gagal</button>
+                                </form>
+                            @endif
+                        </td>
+
                     </tr>
                 @endforeach
             </tbody>
@@ -58,7 +78,7 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const lowonganSelect = document.getElementById('lowongan_id');
             const tahunSelect = document.getElementById('tahun');
             const table = document.getElementById('kandidatTable');
@@ -72,7 +92,8 @@
                     const rowLowonganId = row.getAttribute('data-lowongan-id');
                     const rowTahun = row.getAttribute('data-tahun');
 
-                    if ((lowonganId === '' || rowLowonganId === lowonganId) && (tahun === '' || rowTahun === tahun)) {
+                    if ((lowonganId === '' || rowLowonganId === lowonganId) && (tahun === '' || rowTahun ===
+                            tahun)) {
                         row.style.display = '';
                     } else {
                         row.style.display = 'none';

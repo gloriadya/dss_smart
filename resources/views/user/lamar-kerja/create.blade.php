@@ -50,7 +50,7 @@
                 <label for="pengalaman">Pengalaman Kerja</label>
                 <textarea id="pengalaman_kerja" name="pengalaman_kerja" placeholder="Masukkan pengalaman kerja" rows="4" required></textarea>
             </div>
-            <button type="submit" class="btn">Submit</button>
+            <button class="btn btn-secondary px-4 py-2 me-sm-3" style="border-radius: 100px" style="font-size: 0.8rem" type="submit">Submit</button>
         </form>
 
         <!-- Modal -->

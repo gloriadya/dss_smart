@@ -50,6 +50,12 @@ class NilaiController extends Controller
             'wawancara' => $request->wawancara,
             'nilai' => $nilai
         ]);
+
+        $kandidat = Kandidat::findOrFail($request->kandidat_id);
+
+        $kandidat->sudah_dinilai = 1;
+        $kandidat->save();
+
         // Validate the incoming request data
         // $request->validate([
         //     'kandidat_id' => 'required|exists:kandidats,id',

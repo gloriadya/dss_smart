@@ -1,10 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Log;
 use App\Models\Lowongan;
 use Illuminate\Http\Request;
 use Alert;
+use App\Models\Kandidat;
+use App\Models\KandidatXLowongan;
+use Illuminate\Support\Facades\DB;
 
 class LowonganController extends Controller
 {
@@ -15,6 +19,52 @@ class LowonganController extends Controller
         return view('user.daftar-lowongan.index', [
             'jobPostings' => $jobPostings
         ]);
+    }
+
+    public function status($id)
+    {
+        $kandidats = KandidatXLowongan::where('user_created_id', $id)->get();
+        return view('user.status', compact('kandidats'));
+    }
+
+    public function lolos($id)
+    {
+        $kandidat = Kandidat::findOrFail($id);
+
+        $kandidat->lolos_berkas = 1;
+        $kandidat->save();
+
+        $kandidats = KandidatXLowongan::all();
+
+        $lowongans = DB::table('lowongans')->get();
+
+        $years = DB::table('kandidat_x_lowongan')
+            ->selectRaw('YEAR(created_at) as year')
+            ->groupBy('year')
+            ->get()
+            ->pluck('year');
+
+        return redirect()->route('kandidat.create', compact('kandidats', 'lowongans', 'years'));
+    }
+
+    public function gagal($id)
+    {
+        $kandidat = Kandidat::findOrFail($id);
+
+        $kandidat->lolos_berkas = 0;
+        $kandidat->save();
+
+        $kandidats = KandidatXLowongan::all();
+
+        $lowongans = DB::table('lowongans')->get();
+
+        $years = DB::table('kandidat_x_lowongan')
+            ->selectRaw('YEAR(created_at) as year')
+            ->groupBy('year')
+            ->get()
+            ->pluck('year');
+
+        return redirect()->route('kandidat.create', compact('kandidats', 'lowongans', 'years'));
     }
 
     public function show($id)

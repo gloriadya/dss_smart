@@ -20,7 +20,7 @@
     <link href="css/style.css" rel="stylesheet" />
 </head>
 
-<body class="d-flex flex-column">
+<body class="welcome d-flex flex-column">
     <main class="flex-shrink-0">
         <nav class="navbar navbar-expand-lg navbar-light bg-white">
             <div class="container px-5">
