@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="main-content">
-        <h1>Input Data Calon Pegawai</h1>
+        <h1>Isi Data Diri</h1>
         <form class="form" method="POST" action="{{ route('isian-data-pelamar.store') }}" enctype="multipart/form-data">
             @csrf
             <input type="hidden" id="lowongan_id" name="lowongan_id" value="{{ $lowongan->id }}" required>
